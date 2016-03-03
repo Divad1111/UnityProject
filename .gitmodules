@@ -1,0 +1,6 @@
+[submodule "Assets/Editor/Test"]
+	path = Assets/Editor/Test
+	url = https://github.com/Divad1111/UICodeGanerator.git
+[submodule "Assets/Editor/UICodeGenerator"]
+	path = Assets/Editor/UICodeGenerator
+	url = https://github.com/Divad1111/UICodeGanerator.git
