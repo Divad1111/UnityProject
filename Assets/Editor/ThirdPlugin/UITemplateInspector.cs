@@ -20,7 +20,7 @@ public class UITemplateInspector : Editor
 
 
 
-	[MenuItem("GameObject/UITemplate/Create To Prefab", false, 1)]
+	[MenuItem("GameObject/UITemplate/Create To Prefab", false, 11)]
     static void CreatToPrefab(MenuCommand menuCommand)
     {
         if (menuCommand.context != null)
