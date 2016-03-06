@@ -46,18 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\UICodeGanerator\CSharpFileGenerator.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\CodeGeneratorWindow.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\CommonDefine.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\DefaultNodeConvertor.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\Generator.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\IFileGenerator.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\INodeConvertor.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\NGUIParser.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\Node.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\Parser.cs" />
-     <Compile Include="Assets\Editor\UICodeGanerator\Utility.cs" />
-     <Compile Include="Assets\Editor\UnityCustomPlugins\FindComponetReferences\FindComponentReferences.cs" />
+     <Compile Include="Assets\Editor\ThirdPlugin\UITemplateInspector.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\CSharpFileGenerator.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\CodeGeneratorWindow.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\CommonDefine.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\DefaultNodeConvertor.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\Generator.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\IFileGenerator.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\INodeConvertor.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\NGUIParser.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\Node.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\Parser.cs" />
+     <Compile Include="Assets\Editor\UICodeGenerator\Utility.cs" />
      <Compile Include="Assets\NGUI\EasyTouch\Plugins\Editor\GUIEasyButtonCallBack.cs" />
      <Compile Include="Assets\NGUI\EasyTouch\Plugins\Editor\GUIEasyButtonInspector.cs" />
      <Compile Include="Assets\NGUI\EasyTouch\Plugins\Editor\GUIEasyJoystickCallBack.cs" />
@@ -164,7 +164,6 @@
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
-     <None Include="Assets\Editor\UnityCustomPlugins\FindComponetReferences\readme.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
@@ -188,6 +187,7 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
+     <None Include="Assets\Editor\readme.txt" />
  <Reference Include="Assembly-UnityScript">
  <HintPath>H:/Local/Unity/UnityProject/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>

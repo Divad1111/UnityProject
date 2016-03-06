@@ -8,6 +8,31 @@ using System.Text.RegularExpressions;
 [CustomEditor(typeof(UITemplate))]
 public class UITemplateInspector : Editor
 {
+    static UITemplateInspector()
+    {
+        //PrefabUtility.prefabInstanceUpdated = (go) =>
+        //{
+        //    if (go == null)
+        //    {
+        //        return;
+        //    }
+
+        //    if (go.GetComponent<UITemplate>() == null)
+        //    {
+        //        return;
+        //    }
+
+        //    if (EditorUtility.DisplayDialog("提示", "UITemplate已经修改，时候引用到所有预制件？", "ok", "cancel"))
+        //    {
+        //        Object prefabObj = PrefabUtility.GetPrefabParent(go);
+        //        if (prefabObj != null)
+        //        {
+        //            ApplyPrefab(go, prefabObj, true);
+        //        }
+        //    }
+        //};
+    }
+
 	//模板存放的路径
     private static string TEMPLATE_PREFAB_PATH =  "Assets/UI/Template";
     
@@ -19,6 +44,7 @@ public class UITemplateInspector : Editor
     };
 
 
+    const string PrevNodeName = "__PrevNode";
 
 	[MenuItem("GameObject/UITemplate/Create To Prefab", false, 11)]
     static void CreatToPrefab(MenuCommand menuCommand)
@@ -27,6 +53,12 @@ public class UITemplateInspector : Editor
         {
 			CreatDirectory();
             GameObject selectGameObject = menuCommand.context as GameObject;
+
+            if (!IsChildOfUIRoot(selectGameObject))
+            {
+                EditorUtility.DisplayDialog("错误！", "不在Root下的对象不能制作成UITempalte.", "OK");
+                return;
+            }  
 
             if (IsTemplatePrefabInHierarchy(selectGameObject))
             {
@@ -332,19 +364,51 @@ public class UITemplateInspector : Editor
         EditorApplication.SaveScene();
     }
 
+    static private GameObject GetUIRoot()
+    {
+        var uiRoot = GameObject.FindObjectOfType<UIRoot>();
+        if (uiRoot != null)
+        {
+            return uiRoot.gameObject;
+        }
+
+        var uiCanvas = GameObject.FindObjectOfType<Canvas>(); ;
+        if (uiCanvas != null)
+        {
+            return uiCanvas.gameObject;
+        }
+        return null;
+    }
+
+    static private bool IsChildOfUIRoot(GameObject go)
+    {
+        var uiRoot = go.GetComponentsInParent<UIRoot>(true);
+        if (uiRoot != null && uiRoot.Length > 0)
+        {
+            return true;
+        }
+
+        var uiCanvas = go.GetComponentsInParent<Canvas>(true);
+        if (uiCanvas != null && uiCanvas.Length > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 
     static  private void ClearHierarchy()
     {
-        Canvas canvas = GameObject.FindObjectOfType<Canvas>();
+        var uiRoot = GetUIRoot();
 
-        if (canvas != null)
+        if (uiRoot != null)
         {
-			for(int i =0; i < canvas.transform.childCount; i++){
-
-				Transform t = canvas.transform.GetChild(i);
+            var prevNode = uiRoot.transform.FindChild(PrevNodeName);
+            for (int i = 0; i < prevNode.childCount; i++)
+            {
+                Transform t = prevNode.GetChild(i);
 				if(t.GetComponent<UITemplate>()!= null){
-					GameObject.DestroyImmediate(t.gameObject);
-				}
+                    GameObject.DestroyImmediate(t.gameObject);
+                }
 
 			}
         }
@@ -355,23 +419,43 @@ public class UITemplateInspector : Editor
        
         if (!IsTemplatePrefabInHierarchy(uiTemplate.gameObject))
         {
-            Canvas canvas = GameObject.FindObjectOfType<Canvas>();
-			if (canvas != null)
+            var uiRoot = GetUIRoot();
+            if (uiRoot != null)
             {
-				if((canvas.transform.childCount == 0) ||
-				 (canvas.transform.childCount == 1 && canvas.transform.GetChild((0)).GetComponent<UITemplate>() != null)){
-					ClearHierarchy();
-	                GameObject go = PrefabUtility.InstantiatePrefab(uiTemplate.gameObject) as GameObject;
-	                go.name = uiTemplate.gameObject.name;
+                var prevNode = uiRoot.transform.FindChild(PrevNodeName );
+                if (prevNode == null)
+                {
+                    GameObject newPrevNode = new GameObject();
+                    newPrevNode.name = PrevNodeName;
+                    newPrevNode.transform.parent = uiRoot.transform;
+                    newPrevNode.transform.SetAsFirstSibling();
+                    newPrevNode.transform.localPosition = new Vector3(0, 0, 0);
+                    newPrevNode.transform.localScale = new Vector3(1f, 1f, 1f);
+                    prevNode = newPrevNode.transform;
+                }
+                
 
-					GameObjectUtility.SetParentAndAlign(go, canvas.gameObject);
-	                EditorGUIUtility.PingObject(go);
+                if (prevNode != null)
+                {	
+                    if (prevNode.childCount > 0)
+                    {
+                        var prevUITemplate = prevNode.GetChild(0).GetComponent<UITemplate>();
+                        if (prevUITemplate != null && prevUITemplate.GUID == uiTemplate.GUID)
+                        {
+                            return;
+                        }                        
+                    }
+
+                    ClearHierarchy();
+                    GameObject go = PrefabUtility.InstantiatePrefab(uiTemplate.gameObject) as GameObject;
+                    go.name = uiTemplate.gameObject.name;
+
+                    GameObjectUtility.SetParentAndAlign(go, prevNode.gameObject);
+                    EditorGUIUtility.PingObject(go);
 				}
              
             }
-
         }
-
 
     }
 

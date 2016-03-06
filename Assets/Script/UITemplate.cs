@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [DisallowMultipleComponent]
+[ExecuteInEditMode]
 public class UITemplate : MonoBehaviour {
 
 #if UNITY_EDITOR
@@ -15,6 +16,11 @@ public class UITemplate : MonoBehaviour {
             GUID = System.Guid.NewGuid().ToString();
         }
     }
-#endif
 
+    void OnDisable()
+    {
+        //Don't disable the component.
+        enabled = true;
+    }
+#endif
 }
