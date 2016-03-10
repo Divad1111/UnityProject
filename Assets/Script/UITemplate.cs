@@ -8,7 +8,7 @@ public class UITemplate : MonoBehaviour {
 
 #if UNITY_EDITOR
     [HideInInspector] public string GUID = string.Empty;
-	[HideInInspector] [System.NonSerialized]public List<GameObject> searPrefabs = new List<GameObject>();
+	[HideInInspector] [System.NonSerialized]public Dictionary<GameObject, int> searPrefabs = new Dictionary<GameObject, int>();
     [ContextMenu("GenerateGUID")]
     public void InitGUID()
     {
