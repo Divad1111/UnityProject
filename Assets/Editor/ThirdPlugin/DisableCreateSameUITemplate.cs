@@ -21,91 +21,91 @@ public class DisableCreateSameUITemplate : AssetModificationProcessor
         willCreateAssetPath = path;
     }
 
-    public static string[] OnWillSaveAssets(string[] paths)
-    {   
-        List<string> result = new List<string>();
-        foreach (var path in paths)
-        {   
-            bool isInUITemplateFolder = IsInUITemplateFolder(path);
-            bool isUITemplate = IsUITemplate(path);
-            if (isInUITemplateFolder && isUITemplate)
-            {
-                if(!HaveSameUITemplate(path))
-                {
-                    result.Add(path);
-                }
-            }
-            else if (isInUITemplateFolder && !isUITemplate)
-            {
-                EditorUtility.DisplayDialog("错误", "在UITemplate目录下必须要包含UITemplate组件", "确定");
-                AssetDatabase.DeleteAsset(path);
-            }
-            else if (isUITemplate && !isInUITemplateFolder)
-            {
-                EditorUtility.DisplayDialog("提示", "UITemplate预制必须放置在UITemplate目录，必须移动到UITemplate目录", "确定");
-                string validateMove = AssetDatabase.ValidateMoveAsset(path, UITemplateFolder);
-                if(string.IsNullOrEmpty(validateMove))
-                {
-                    AssetDatabase.MoveAsset(path, UITemplateFolder);
-                }
-                else
-                {
-                    AssetDatabase.MoveAssetToTrash(path);
-                }
-            }
-            else 
-            {
-                if (IsUnlocked(path))
-                    result.Add(path);
-                else
-                    Debug.LogError(path + " is read-only.");
-            }
-        }
-        return result.ToArray();
-    }
+    //public static string[] OnWillSaveAssets(string[] paths)
+    //{   
+    //    List<string> result = new List<string>();
+    //    foreach (var path in paths)
+    //    {   
+    //        bool isInUITemplateFolder = IsInUITemplateFolder(path);
+    //        bool isUITemplate = IsUITemplate(path);
+    //        if (isInUITemplateFolder && isUITemplate)
+    //        {
+    //            if(!HaveSameUITemplate(path))
+    //            {
+    //                result.Add(path);
+    //            }
+    //        }
+    //        else if (isInUITemplateFolder && !isUITemplate)
+    //        {
+    //            EditorUtility.DisplayDialog("错误", "在UITemplate目录下必须要包含UITemplate组件", "确定");
+    //            AssetDatabase.DeleteAsset(path);
+    //        }
+    //        else if (isUITemplate && !isInUITemplateFolder)
+    //        {
+    //            EditorUtility.DisplayDialog("提示", "UITemplate预制必须放置在UITemplate目录，必须移动到UITemplate目录", "确定");
+    //            string validateMove = AssetDatabase.ValidateMoveAsset(path, UITemplateFolder);
+    //            if(string.IsNullOrEmpty(validateMove))
+    //            {
+    //                AssetDatabase.MoveAsset(path, UITemplateFolder);
+    //            }
+    //            else
+    //            {
+    //                AssetDatabase.MoveAssetToTrash(path);
+    //            }
+    //        }
+    //        else 
+    //        {
+    //            if (IsUnlocked(path))
+    //                result.Add(path);
+    //            else
+    //                Debug.LogError(path + " is read-only.");
+    //        }
+    //    }
+    //    return result.ToArray();
+    //}
 
-    public static AssetMoveResult OnWillMoveAsset(string oldPath, string newPath)
-    {   
-        AssetMoveResult result = AssetMoveResult.DidNotMove;
-        if (IsLocked(oldPath))
-        {
-            Debug.LogError(string.Format("Could not move {0} to {1} because {0} is locked!", oldPath, newPath));
-            result = AssetMoveResult.FailedMove;
-        }
-        else if (IsLocked(newPath))
-        {
-            Debug.LogError(string.Format("Could not move {0} to {1} because {1} is locked!", oldPath, newPath));
-            result = AssetMoveResult.FailedMove;
-        }
+    //public static AssetMoveResult OnWillMoveAsset(string oldPath, string newPath)
+    //{   
+    //    AssetMoveResult result = AssetMoveResult.DidNotMove;
+    //    if (IsLocked(oldPath))
+    //    {
+    //        Debug.LogError(string.Format("Could not move {0} to {1} because {0} is locked!", oldPath, newPath));
+    //        result = AssetMoveResult.FailedMove;
+    //    }
+    //    else if (IsLocked(newPath))
+    //    {
+    //        Debug.LogError(string.Format("Could not move {0} to {1} because {1} is locked!", oldPath, newPath));
+    //        result = AssetMoveResult.FailedMove;
+    //    }
 
         
-        if (IsInUITemplateFolder(oldPath))
-        {
-            result = AssetMoveResult.FailedMove;
-        }
+    //    if (IsInUITemplateFolder(oldPath))
+    //    {
+    //        result = AssetMoveResult.FailedMove;
+    //    }
         
-        if(IsUITemplate(oldPath) && !IsInUITemplateFolder(newPath))
-        {
-            result = AssetMoveResult.FailedMove;
-        }
-        return result;
-    }
+    //    if(IsUITemplate(oldPath) && !IsInUITemplateFolder(newPath))
+    //    {
+    //        result = AssetMoveResult.FailedMove;
+    //    }
+    //    return result;
+    //}
 
-    public static AssetDeleteResult OnWillDeleteAsset(string assetPath, RemoveAssetOptions option)
-    {
-        if (IsLocked(assetPath))
-        {
-            Debug.LogError(string.Format("Could not delete {0} because it is locked!", assetPath));
-            return AssetDeleteResult.FailedDelete;
-        }
+    //public static AssetDeleteResult OnWillDeleteAsset(string assetPath, RemoveAssetOptions option)
+    //{
+    //    if (IsLocked(assetPath))
+    //    {
+    //        Debug.LogError(string.Format("Could not delete {0} because it is locked!", assetPath));
+    //        return AssetDeleteResult.FailedDelete;
+    //    }
 
-        if (IsInUITemplateFolder(assetPath) && IsUITemplate(assetPath))
-        {
-            UITemplateInspector.DeletePrefab(assetPath);   
-        }
+    //    if (IsInUITemplateFolder(assetPath) && IsUITemplate(assetPath))
+    //    {
+    //        UITemplateInspector.DeletePrefab(assetPath);   
+    //    }
 
-        return AssetDeleteResult.DidNotDelete;
-    }
+    //    return AssetDeleteResult.DidNotDelete;
+    //}
 
     static bool IsUnlocked(string path)
     {
