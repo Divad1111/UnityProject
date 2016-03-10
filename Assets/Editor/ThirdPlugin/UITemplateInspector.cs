@@ -8,6 +8,20 @@ using System.Text.RegularExpressions;
 [CustomEditor(typeof(UITemplate))]
 public class UITemplateInspector : Editor
 {
+
+	//模板存放的路径
+    private static string TEMPLATE_PREFAB_PATH =  "Assets/Resources/UITemplate";
+    
+
+    //Prefab存放的路径
+    private static List<string> UIPrefabs = new List<string>()
+    {
+       "Assets/Resources/UIPrefab"
+    };
+
+
+    const string PrevNodeName = "__PrevNode";
+
     static UITemplateInspector()
     {
         //PrefabUtility.prefabInstanceUpdated = (go) =>
@@ -32,19 +46,6 @@ public class UITemplateInspector : Editor
         //    }
         //};
     }
-
-	//模板存放的路径
-    private static string TEMPLATE_PREFAB_PATH =  "Assets/UI/Template";
-    
-
-    //Prefab存放的路径
-    private static List<string> UIPrefabs = new List<string>()
-    {
-       "Assets/UI/Prefab"
-    };
-
-
-    const string PrevNodeName = "__PrevNode";
 
 	[MenuItem("GameObject/UITemplate/Create To Prefab", false, 11)]
     static void CreatToPrefab(MenuCommand menuCommand)
@@ -84,8 +85,8 @@ public class UITemplateInspector : Editor
     void OnEnable()
     {
         uiTemplate = (UITemplate)target;
-
-        if (IsTemplatePrefabInInProjectView(uiTemplate.gameObject))
+        
+        if (!EditorApplication.isPlaying && IsTemplatePrefabInInProjectView(uiTemplate.gameObject))
         {
             ShowHierarchy();
         }
@@ -192,10 +193,10 @@ public class UITemplateInspector : Editor
                 if (prefab.GetComponentsInChildren<UITemplate>(true).Length > 0)
                 {
                     GameObject go = GameObject.Instantiate(prefab) as GameObject;
-                    UITemplate[] templates = go.GetComponentsInChildren<UITemplate>();
+                    UITemplate[] templates = go.GetComponentsInChildren<UITemplate>(true);
                     foreach (UITemplate template in templates)
                     {
-                        if (template.GetComponentsInChildren<UITemplate>().Length > 1)
+                        if (template.GetComponentsInChildren<UITemplate>(true).Length > 1)
                         {
                             Debug.LogError(file.FullName + " 模板 " + template.name + " 进行了嵌套的错误操作~请删除重试");
                             if (!trySearch)
@@ -287,7 +288,7 @@ public class UITemplateInspector : Editor
 
 
 
-    static private void DeletePrefab(string path)
+    static public void DeletePrefab(string path)
     {
         if (EditorUtility.DisplayDialog("注意！", "是否进行递归查找批量删除模板？", "ok", "cancel"))
         {
@@ -403,6 +404,11 @@ public class UITemplateInspector : Editor
         if (uiRoot != null)
         {
             var prevNode = uiRoot.transform.FindChild(PrevNodeName);
+            if (prevNode == null)
+            {
+                return;
+            }
+
             for (int i = 0; i < prevNode.childCount; i++)
             {
                 Transform t = prevNode.GetChild(i);
