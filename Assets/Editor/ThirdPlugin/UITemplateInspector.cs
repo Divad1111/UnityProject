@@ -122,11 +122,11 @@ public class UITemplateInspector : Editor
             }
         }
         
-		if (isPrefabInProjectView)
+		//if (isPrefabInProjectView)
         {
             if (GUILayout.Button("SearchUITemplate"))
             {
-                uiTemplate.searPrefabs = TrySearchUITemplate(uiTemplate.GUID);
+                uiTemplate.searPrefabs = TrySearchUITemplate(new List<string>{uiTemplate.GUID});
                 return;
             }
 	        if (GUILayout.Button("SearchPrefab"))
@@ -138,16 +138,12 @@ public class UITemplateInspector : Editor
             
             if (GUILayout.Button("ApplyUITemplate"))
 	        {
-                //if (IsTemplatePrefabInHierarchy(uiTemplate.gameObject))
-                //{
-                //    ReplaceUITemplate(uiTemplate.gameObject, GetUITemplate(uiTemplate.GUID));
-                //}
-                //var uiTemplatePrefab = GetUITemplate(uiTemplate.GUID);
-                //if (uiTemplatePrefab != null)
+
+                if (IsTemplatePrefabInHierarchy(uiTemplate.gameObject))
                 {
                     ReplaceUITemplate(uiTemplate.gameObject, GetUITemplate(uiTemplate.GUID));
-                    ApplyUITemplate(GetUITemplate(uiTemplate.GUID));
-                }
+                }                
+                ApplyUITemplate(GetUITemplate(uiTemplate.GUID));
                 //else
                 //{
                 //    EditorUtility.DisplayDialog("提示", "没有获取到GUID为：" + uiTemplate.GUID + "UI模板", "确定");
@@ -184,7 +180,7 @@ public class UITemplateInspector : Editor
         GUILayout.EndHorizontal();
 
 
-		if (isPrefabInProjectView)
+		//if (isPrefabInProjectView)
 		{
 	        if(uiTemplate != null && uiTemplate.searPrefabs.Count > 0)
 	        {
@@ -245,7 +241,7 @@ public class UITemplateInspector : Editor
         return prefabs;
     }
 
-    static private  Dictionary<GameObject, int> TrySearchUITemplate(string guid)
+    static private  Dictionary<GameObject, int> TrySearchUITemplate(List<string> guids)
     {
 
         Dictionary<GameObject, int> prefabs = new Dictionary<GameObject, int>();
@@ -266,7 +262,7 @@ public class UITemplateInspector : Editor
                 UITemplate[] templates = go.GetComponentsInChildren<UITemplate>(true);
                 foreach (UITemplate template in templates)
                 {
-                    if (template.GUID == guid)
+                    if (guids.Contains(template.GUID))
                     {
                         int count = 0;
                         if (prefabs.TryGetValue(prefab, out count))
@@ -288,6 +284,12 @@ public class UITemplateInspector : Editor
 
     static private  void ApplyUITemplate(GameObject uiTemplateprefab)
     {
+        if (uiTemplateprefab == null)
+        {
+            Debug.LogError("uiTemplateprefab is null.");
+            return;
+        }
+
         if(!IsUITemplate(uiTemplateprefab))
         {
             EditorUtility.DisplayDialog("注意！", "不是UI模板!!!!", "确定");
@@ -298,16 +300,20 @@ public class UITemplateInspector : Editor
         {
             Debug.Log("ApplyUITemplate : " + uiTemplateprefab.name);
             
-            var replacePrefab = AssetDatabase.LoadAssetAtPath(AssetDatabase.GetAssetPath(uiTemplateprefab), typeof(GameObject)) as GameObject;
+            //var replacePrefab = AssetDatabase.LoadAssetAtPath(AssetDatabase.GetAssetPath(uiTemplateprefab), typeof(GameObject)) as GameObject;
 
-            var template = uiTemplateprefab.GetComponent<UITemplate>();
-            Dictionary<GameObject, int> references = TrySearchUITemplate(template.GUID);
+            var uiTemplateprefabGo = PrefabUtility.InstantiatePrefab(uiTemplateprefab) as GameObject;
+            List<string> updatedUITemplateGUIDs = new List<string>();
+            UpdateUITemplate(uiTemplateprefabGo.transform, ref updatedUITemplateGUIDs);
+
+            Dictionary<GameObject, int> references = TrySearchUITemplate(updatedUITemplateGUIDs);
             foreach (var reference in references)
             {
                 GameObject go = PrefabUtility.InstantiatePrefab(reference.Key) as GameObject;
-                UpdateUITemplateForSpecificPrefab(go.transform, template.GUID, replacePrefab);
-                DestroyImmediate(go);
-            }           
+                UpdateUITemplateForSpecificPrefab(go.transform, updatedUITemplateGUIDs);
+                GameObject.DestroyImmediate(go);
+            } 
+            GameObject.DestroyImmediate(uiTemplateprefabGo);
         }
     }
 
@@ -375,20 +381,44 @@ public class UITemplateInspector : Editor
         }
     }
 
-    static private bool UpdateUITemplateForSpecificPrefab(Transform go, string guid, GameObject replacedUITemplatePrefab)
+    static private void UpdateUITemplate(Transform go, ref List<string> updateTemplateGUIDs)
+    {
+        if (go == null )
+            return;
+
+        if (IsUITemplate(go.gameObject))
+        {
+            var uiTemplateGUID = go.gameObject.GetComponent<UITemplate>().GUID;
+            updateTemplateGUIDs.Add(uiTemplateGUID);
+            var prefabParent = GetUITemplate(uiTemplateGUID);
+            PrefabUtility.ReplacePrefab(go.gameObject, prefabParent, ReplacePrefabOptions.ConnectToPrefab);
+            Refresh();
+        }    
+
+        for (int i = 0; i < go.childCount; ++i)
+        {
+            UpdateUITemplate(go.GetChild(i), ref updateTemplateGUIDs);
+        }
+    }
+
+    static private bool UpdateUITemplateForSpecificPrefab(Transform go, List<string> guids)
     {
         if (go == null)
             return false;
 
         var uiTemplate = go.GetComponent<UITemplate>();
-        if (uiTemplate != null && uiTemplate.GUID == guid)
+        if (uiTemplate != null && guids.Contains(uiTemplate.GUID))
         {
-            GameObject newInstance = GameObject.Instantiate(replacedUITemplatePrefab) as GameObject;
-            newInstance.name = replacedUITemplatePrefab.name;
+            var replacedUITemplatePrefab = GetUITemplate(uiTemplate.GUID);
+
+            GameObject newInstance = PrefabUtility.InstantiatePrefab(replacedUITemplatePrefab) as GameObject;
+            newInstance.name = go.name;
             newInstance.transform.SetParent(go.parent);
             newInstance.transform.localPosition = go.localPosition;
             newInstance.SetActive(go.gameObject.activeSelf);
-            DestroyImmediate(go.gameObject);
+            var siblingIndex = go.transform.GetSiblingIndex();
+            GameObject.DestroyImmediate(go.gameObject);
+            newInstance.transform.SetSiblingIndex(siblingIndex);
             return true;
         }
         else if (go.childCount <= 0)
@@ -403,7 +433,7 @@ public class UITemplateInspector : Editor
 
         for(int i = 0; i < go.childCount; ++i )
         {
-            bool canUpdate = UpdateUITemplateForSpecificPrefab(go.GetChild(i), guid, replacedUITemplatePrefab);
+            bool canUpdate = UpdateUITemplateForSpecificPrefab(go.GetChild(i), guids);
             if (canUpdates != null)
             {
                 canUpdates.Add(canUpdate);
@@ -416,7 +446,8 @@ public class UITemplateInspector : Editor
             {
                 if(haveUpdate)
                 {
-                    PrefabUtility.ReplacePrefab(go.gameObject, PrefabUtility.GetPrefabParent(go.gameObject), ReplacePrefabOptions.ConnectToPrefab);
+                    var prefabParent = GetUITemplate(go.gameObject.GetComponent<UITemplate>().GUID);
+                    PrefabUtility.ReplacePrefab(go.gameObject, prefabParent, ReplacePrefabOptions.ConnectToPrefab);
                     Refresh();
                     return true;
                 }
@@ -438,13 +469,13 @@ public class UITemplateInspector : Editor
             return;
         }
 
-        var newPrefab = prefab;
-        if (PrefabUtility.GetPrefabType(prefab) != PrefabType.PrefabInstance)
-        {
-            newPrefab = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        }
-        PrefabUtility.ReplacePrefab(newPrefab, targetPrefab, ReplacePrefabOptions.ConnectToPrefab);
-        DestroyImmediate(newPrefab);
+        //var newPrefab = prefab;
+        //if (PrefabUtility.GetPrefabType(prefab) != PrefabType.PrefabInstance)
+        //{
+        //    newPrefab = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+        //}
+        PrefabUtility.ReplacePrefab(prefab, targetPrefab, ReplacePrefabOptions.ConnectToPrefab);
+        //DestroyImmediate(newPrefab);
         Refresh();
     }
 
@@ -693,7 +724,7 @@ public class UITemplateInspector : Editor
             GameObject prefab = AssetDatabase.LoadAssetAtPath(file.FullName.Substring(file.FullName.IndexOf("Assets")), typeof(GameObject)) as GameObject;
 
             var uiTemplate = prefab.GetComponent<UITemplate>();
-            if (uiTemplate != null)
+            if (uiTemplate != null && !_cacheUITemplate.ContainsKey(uiTemplate.GUID))
             {
                 _cacheUITemplate.Add(uiTemplate.GUID, prefab);
             }
