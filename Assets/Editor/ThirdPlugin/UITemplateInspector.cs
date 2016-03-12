@@ -255,8 +255,8 @@ public class UITemplateInspector : Editor
 
             if (prefab.GetComponentsInChildren<UITemplate>(true).Length > 0)
             {
-                //if (IsSpecificUITemplate(prefab, guid))
-                //    continue;
+				if (IsSpecificUITemplate(prefab, guids))
+					continue;
 
                 GameObject go = GameObject.Instantiate(prefab) as GameObject;
                 UITemplate[] templates = go.GetComponentsInChildren<UITemplate>(true);
@@ -411,14 +411,26 @@ public class UITemplateInspector : Editor
         {
             var replacedUITemplatePrefab = GetUITemplate(uiTemplate.GUID);
 
-            GameObject newInstance = PrefabUtility.InstantiatePrefab(replacedUITemplatePrefab) as GameObject;
+            GameObject newInstance = GameObject.Instantiate(replacedUITemplatePrefab) as GameObject;
             newInstance.name = go.name;
-            newInstance.transform.SetParent(go.parent);
-            newInstance.transform.localPosition = go.localPosition;
-            newInstance.SetActive(go.gameObject.activeSelf);
-            var siblingIndex = go.transform.GetSiblingIndex();
-            GameObject.DestroyImmediate(go.gameObject);
-            newInstance.transform.SetSiblingIndex(siblingIndex);
+
+//			var parent = go.parent;
+//			var position = go.localPosition;
+//			var activeSelf = go.gameObject.activeSelf;
+//			var siblingIndex = go.transform.GetSiblingIndex();
+
+			newInstance.transform.SetParent(go.parent);
+			newInstance.transform.localPosition = go.localPosition;
+			newInstance.SetActive(go.gameObject.activeSelf);
+			
+			GameObject.DestroyImmediate(go.gameObject);
+
+			newInstance.transform.SetSiblingIndex(go.transform.GetSiblingIndex());
+
+//			newInstance.transform.SetParent(parent);
+//			newInstance.transform.localPosition = position;
+//			newInstance.SetActive(activeSelf);
+//            newInstance.transform.SetSiblingIndex(siblingIndex);
             return true;
         }
         else if (go.childCount <= 0)
@@ -711,6 +723,17 @@ public class UITemplateInspector : Editor
 
         return uiTemplate.GUID == guid;
     }
+
+	static private bool IsSpecificUITemplate(GameObject prefab, List<string> guids)
+	{
+		bool ret = false;
+		foreach (var guid in guids) 
+		{
+			ret = ret || IsSpecificUITemplate(prefab, guid);
+		}
+		return ret;
+	}
+
 
     static public void CacheUITemplateList()
     {
