@@ -140,7 +140,8 @@ public class UITemplateInspector : Editor
                 //if (IsTemplatePrefabInHierarchy(uiTemplate.gameObject))
                 //{
                     
-                //}           
+                //}    
+       
                 DeleteUITemplateReferences(new List<string> { uiTemplate.GUID });
                 return;
             }
