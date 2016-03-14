@@ -1,4 +1,4 @@
-﻿// created: 3/14/2016 12:02:46 AM
+﻿// created: 3/14/2016 2:52:41 PM
 // author: Zhangwei
 
 using UnityEngine;
@@ -23,11 +23,11 @@ public class bag : MonoBehaviour
     {
         _friendListPanel = UICGTools.FindChild(transform, "FriendListPanel");
         _playerIconTemplate = UICGTools.FindChild(_friendListPanel, "PlayerIconTemplate");
-        _playerQuality = UICGTools.FindChild(transform, "Sprite(PlayerQuality)").GetComponent<UISprite>();
-        _playerIcon = UICGTools.FindChild(transform, "Sprite(PlayerIcon)").GetComponent<UISprite>();
-        _t = UICGTools.FindChild(transform, "Sprite(t)").GetComponent<UISprite>();
+        _playerQuality = UICGTools.FindChild(_playerIconTemplate, "Sprite(PlayerQuality)").GetComponent<UISprite>();
+        _playerIcon = UICGTools.FindChild(_playerIconTemplate, "Sprite(PlayerIcon)").GetComponent<UISprite>();
+        _t = UICGTools.FindChild(_friendListPanel, "Sprite(t)").GetComponent<UISprite>();
         _mainPanel = UICGTools.FindChild(transform, "MainPanel");
-        _gold = UICGTools.FindChild(transform, "Sprite(Gold)").GetComponent<UISprite>();
+        _gold = UICGTools.FindChild(_mainPanel, "Sprite(Gold)").GetComponent<UISprite>();
         _goldCount = UICGTools.FindChild(_mainPanel, "Label(GoldCount)").GetComponent<UILabel>();
         _close = UICGTools.FindChild(_mainPanel, "Button(Close)");
 
