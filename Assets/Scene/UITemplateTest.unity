@@ -367,6 +367,7 @@ MonoBehaviour:
   scrollAxisName: Mouse ScrollWheel
   verticalAxisName: Vertical
   horizontalAxisName: Horizontal
+  commandClick: 1
   submitKey0: 13
   submitKey1: 330
   cancelKey0: 27
@@ -508,7 +509,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1626664806}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &733604353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +662,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 839010566}
   - 114: {fileID: 839010567}
+  - 111: {fileID: 839010568}
   m_Layer: 5
   m_Name: MainPanel
   m_TagString: Untagged
@@ -675,7 +677,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839010565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -350.999969, y: 5.99990654, z: 0}
+  m_LocalPosition: {x: -384, y: 0, z: 0}
   m_LocalScale: {x: .999944031, y: .999944031, z: .999944031}
   m_Children:
   - {fileID: 412508990}
@@ -720,6 +722,21 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .473684222
+--- !u!111 &839010568
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839010565}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b84ded9229f4f4f2dabaa2fd6a80f17f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b84ded9229f4f4f2dabaa2fd6a80f17f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1563335517
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +859,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1626664806}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &1584223703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,8 +1014,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 733604352}
   - {fileID: 1584223702}
+  - {fileID: 733604352}
   m_Father: {fileID: 1574713464}
   m_RootOrder: 0
 --- !u!114 &1626664807
@@ -1144,7 +1161,7 @@ Transform:
   m_GameObject: {fileID: 1961103750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00410677632, y: .00410677632, z: .00410677632}
+  m_LocalScale: {x: .0037313432, y: .0037313432, z: .0037313432}
   m_Children:
   - {fileID: 1563335518}
   - {fileID: 573404141}
