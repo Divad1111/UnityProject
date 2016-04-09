@@ -8,6 +8,7 @@ PlayerSettings:
   defaultScreenOrientation: 4
   targetDevice: 2
   targetGlesGraphics: 1
+  targetIOSGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
@@ -67,11 +68,12 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.Company.ProductName
+  iPhoneBundleIdentifier: mpany.test
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: 6ca97bb6f0c279947a2ec362b17c5d77
   iPhoneBundleVersion: 1.0
+  iPhoneShortBundleVersion: 1.0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -101,15 +103,29 @@ PlayerSettings:
   iPadHighResPortraitSplashScreen: {fileID: 0}
   iPadLandscapeSplashScreen: {fileID: 0}
   iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iOSLaunchScreenType: 0
+  iOSLaunchScreenPortrait: {fileID: 0}
+  iOSLaunchScreenLandscape: {fileID: 0}
+  iOSLaunchScreenBackgroundColor:
+    serializedVersion: 2
+    rgba: 4285886290
+  iOSLaunchScreenFillPct: 100
+  iOSLaunchScreenSize: 100
+  iOSLaunchScreenCustomXibPath: 
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - m_Icon: {fileID: 0}
+      m_Size: 128
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
+  locationUsageDescription: 
   XboxTitleId: 
   XboxImageXexPath: 
   XboxSpaPath: 
@@ -150,7 +166,9 @@ PlayerSettings:
   psp2PackagedResourcesPath: 
   flashStrippingLevel: 2
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: 
+    4: 
   metroPackageName: MyPlugin
   metroPackageLogo: 
   metroPackageLogo140: 
@@ -242,6 +260,14 @@ PlayerSettings:
   tizenGPSPermissions: 0
   tizenMicrophonePermissions: 0
   stvDeviceAddress: 
+  wp8UnprocessedPlugins: []
+  intPropertyNames:
+  - iOS::Architecture
+  - iOS::EnableIncrementalBuildSupportForIl2cpp
+  - iOS::ScriptingBackend
+  iOS::Architecture: 0
+  iOS::EnableIncrementalBuildSupportForIl2cpp: 1
+  iOS::ScriptingBackend: 0
   firstStreamedLevelWithResources: 0
   unityRebuildLibraryVersion: 9
   unityForwardCompatibleVersion: 39

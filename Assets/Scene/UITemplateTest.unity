@@ -237,6 +237,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 412508990}
   - 114: {fileID: 412508989}
+  - 114: {fileID: 412508991}
   m_Layer: 5
   m_Name: Sprite(Gold)
   m_TagString: Untagged
@@ -301,11 +302,24 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 412508988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 621, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 839010566}
   m_RootOrder: 0
+--- !u!114 &412508991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412508988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60a6adcebf0b894682a02177f671b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canJump: 0
+  jumpHeight: 0
 --- !u!1 &573404140
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +381,6 @@ MonoBehaviour:
   scrollAxisName: Mouse ScrollWheel
   verticalAxisName: Vertical
   horizontalAxisName: Horizontal
-  commandClick: 1
   submitKey0: 13
   submitKey1: 330
   cancelKey0: 27
@@ -1161,7 +1174,7 @@ Transform:
   m_GameObject: {fileID: 1961103750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0037313432, y: .0037313432, z: .0037313432}
+  m_LocalScale: {x: .00410677632, y: .00410677632, z: .00410677632}
   m_Children:
   - {fileID: 1563335518}
   - {fileID: 573404141}
