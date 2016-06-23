@@ -10,5 +10,17 @@ public class TestEditorExtension  {
         Debug.Log(AssetDatabase.AssetPathToGUID("Assets/Resources/UITemplate/AAA.prefab"));
     }
 
+    [MenuItem("Tools/Highlight")]
+    public static void Highlight()
+    {
+        Highlighter.Highlight("Inspector", "Depth");
+    }
+
+    [MenuItem("Tools/HideHandle")]
+    public static void HideHandle()
+    {
+        Tools.hidden = !Tools.hidden;
+    }
+
     
 }

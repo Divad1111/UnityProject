@@ -42,8 +42,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 8c70ffbcbb0193742b38de81680cd171, type: 2}
   mSprites:
   - name: Box01
-    x: 0
-    y: 314
+    x: 2
+    y: 488
     width: 141
     height: 124
     borderLeft: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Box02
-    x: 0
-    y: 64
+    x: 211
+    y: 397
     width: 141
     height: 124
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Box03
-    x: 0
-    y: 689
+    x: 2
+    y: 362
     width: 141
     height: 124
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Box04
-    x: 0
-    y: 439
+    x: 213
+    y: 271
     width: 141
     height: 124
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Box05
-    x: 0
-    y: 564
+    x: 2
+    y: 236
     width: 141
     height: 124
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Box06
-    x: 0
-    y: 189
+    x: 214
+    y: 145
     width: 141
     height: 124
     borderLeft: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Box07
-    x: 831
-    y: 631
+    x: 145
+    y: 236
     width: 82
     height: 66
     borderLeft: 0
@@ -132,35 +132,9 @@ MonoBehaviour:
     paddingRight: 2
     paddingTop: 3
     paddingBottom: 1
-  - name: Box07_light
-    x: 161
-    y: 751
-    width: 162
-    height: 162
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Box07_light02
-    x: 872
-    y: 810
-    width: 102
-    height: 103
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 14
-    paddingRight: 14
-    paddingTop: 13
-    paddingBottom: 14
   - name: Box08
-    x: 414
-    y: 548
+    x: 2
+    y: 946
     width: 74
     height: 68
     borderLeft: 0
@@ -172,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 2
   - name: BoxAvatar
-    x: 0
-    y: 814
+    x: 2
+    y: 74
     width: 160
     height: 210
     borderLeft: 0
@@ -184,22 +158,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: BoxAvatar+
-    x: 542
-    y: 718
-    width: 138
-    height: 32
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: BoxInner
-    x: 973
-    y: 759
+    x: 458
+    y: 486
     width: 50
     height: 50
     borderLeft: 0
@@ -210,22 +171,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: BoxInner+
-    x: 722
-    y: 927
-    width: 240
-    height: 97
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 10
-    paddingTop: 0
-    paddingBottom: 3
   - name: BoxSelected
-    x: 922
-    y: 700
+    x: 458
+    y: 486
     width: 50
     height: 50
     borderLeft: 0
@@ -237,34 +185,34 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_A_01
-    x: 341
-    y: 1
-    width: 54
-    height: 54
+    x: 145
+    y: 646
+    width: 55
+    height: 55
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 1
+    paddingRight: 0
     paddingTop: 0
-    paddingBottom: 1
+    paddingBottom: 0
   - name: btn_A_05
-    x: 536
-    y: 562
-    width: 54
-    height: 54
+    x: 88
+    y: 614
+    width: 55
+    height: 55
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 1
+    paddingRight: 0
     paddingTop: 0
-    paddingBottom: 1
+    paddingBottom: 0
   - name: btn_A_light
-    x: 264
-    y: 607
+    x: 72
+    y: 946
     width: 73
     height: 73
     borderLeft: 0
@@ -276,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_B_+
-    x: 787
-    y: 576
+    x: 307
+    y: 667
     width: 40
     height: 40
     borderLeft: 0
@@ -289,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_C
-    x: 161
-    y: 681
+    x: 214
+    y: 74
     width: 179
     height: 69
     borderLeft: 0
@@ -302,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_D
-    x: 161
-    y: 275
+    x: 209
+    y: 583
     width: 96
     height: 96
     borderLeft: 0
@@ -315,8 +263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_fang
-    x: 975
-    y: 831
+    x: 307
+    y: 583
     width: 41
     height: 82
     borderLeft: 0
@@ -328,8 +276,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_mini
-    x: 837
-    y: 720
+    x: 357
+    y: 201
     width: 84
     height: 30
     borderLeft: 0
@@ -341,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_up
-    x: 746
-    y: 627
+    x: 395
+    y: 74
     width: 84
     height: 70
     borderLeft: 0
@@ -353,9 +301,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ButtonAdd
-    x: 963
-    y: 922
+  - name: ButtonAdd.PNG
+    x: 356
+    y: 315
     width: 26
     height: 26
     borderLeft: 0
@@ -367,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonAtt
-    x: 574
-    y: 793
+    x: 389
+    y: 234
     width: 120
     height: 120
     borderLeft: 0
@@ -380,8 +328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonCity+
-    x: 161
-    y: 578
+    x: 354
+    y: 520
     width: 102
     height: 102
     borderLeft: 0
@@ -392,9 +340,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ButtonClose
-    x: 264
-    y: 505
+  - name: ButtonClose.PNG
+    x: 166
+    y: 763
     width: 72
     height: 72
     borderLeft: 0
@@ -406,21 +354,21 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonDir
-    x: 161
-    y: 71
-    width: 71
+    x: 395
+    y: 160
+    width: 72
     height: 108
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 1
+    paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ButtonHelp
-    x: 973
-    y: 702
+  - name: ButtonHelp.PNG
+    x: 88
+    y: 671
     width: 48
     height: 48
     borderLeft: 0
@@ -432,8 +380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonJump
-    x: 161
-    y: 475
+    x: 354
+    y: 416
     width: 102
     height: 102
     borderLeft: 0
@@ -445,8 +393,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ButtonMin
-    x: 990
-    y: 922
+    x: 356
+    y: 287
     width: 26
     height: 26
     borderLeft: 0
@@ -457,87 +405,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ButtonPause
-    x: 161
-    y: 7
-    width: 70
-    height: 63
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 1
-  - name: ButtonPlay
-    x: 161
-    y: 372
-    width: 102
-    height: 102
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ButtonServer
-    x: 264
-    y: 402
-    width: 72
-    height: 72
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ButtonSet
-    x: 341
-    y: 399
-    width: 70
-    height: 63
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 1
-  - name: ButtonTake
-    x: 341
-    y: 463
-    width: 64
-    height: 80
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: CardChip
-    x: 574
-    y: 755
-    width: 98
-    height: 37
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Double0
-    x: 638
-    y: 554
+  - name: Double0.PNG
+    x: 145
+    y: 598
     width: 46
     height: 62
     borderLeft: 0
@@ -548,9 +418,9 @@ MonoBehaviour:
     paddingRight: 8
     paddingTop: 5
     paddingBottom: 5
-  - name: Double1
-    x: 128
-    y: 1
+  - name: Double1.PNG
+    x: 356
+    y: 343
     width: 24
     height: 62
     borderLeft: 0
@@ -561,9 +431,9 @@ MonoBehaviour:
     paddingRight: 19
     paddingTop: 5
     paddingBottom: 5
-  - name: Double2
-    x: 341
-    y: 120
+  - name: Double2.PNG
+    x: 458
+    y: 610
     width: 48
     height: 68
     borderLeft: 0
@@ -574,35 +444,35 @@ MonoBehaviour:
     paddingRight: 7
     paddingTop: 2
     paddingBottom: 2
-  - name: Double3
-    x: 591
-    y: 553
+  - name: Double3.PNG
+    x: 145
+    y: 502
     width: 46
-    height: 63
+    height: 64
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 6
     paddingRight: 8
-    paddingTop: 5
+    paddingTop: 4
     paddingBottom: 4
-  - name: Double4
-    x: 341
-    y: 329
+  - name: Double4.PNG
+    x: 446
+    y: 680
     width: 56
-    height: 69
+    height: 70
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 2
     paddingRight: 2
-    paddingTop: 2
+    paddingTop: 1
     paddingBottom: 1
-  - name: Double5
-    x: 489
-    y: 552
+  - name: Double5.PNG
+    x: 145
+    y: 454
     width: 46
     height: 64
     borderLeft: 0
@@ -613,61 +483,61 @@ MonoBehaviour:
     paddingRight: 8
     paddingTop: 5
     paddingBottom: 3
-  - name: Double6
-    x: 685
-    y: 555
+  - name: Double6.PNG
+    x: 145
+    y: 550
     width: 46
-    height: 61
+    height: 62
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 6
     paddingRight: 8
-    paddingTop: 6
+    paddingTop: 5
     paddingBottom: 5
-  - name: Double7
-    x: 341
-    y: 189
-    width: 47
+  - name: Double7.PNG
+    x: 458
+    y: 538
+    width: 48
     height: 70
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 6
+    paddingLeft: 5
     paddingRight: 7
     paddingTop: 1
     paddingBottom: 1
-  - name: Double8
-    x: 341
-    y: 56
+  - name: Double8.PNG
+    x: 145
+    y: 404
     width: 48
-    height: 63
+    height: 64
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 5
     paddingRight: 7
-    paddingTop: 5
+    paddingTop: 4
     paddingBottom: 4
-  - name: Double9
-    x: 341
-    y: 260
-    width: 49
+  - name: Double9.PNG
+    x: 458
+    y: 416
+    width: 50
     height: 68
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 5
+    paddingLeft: 4
     paddingRight: 6
     paddingTop: 2
     paddingBottom: 2
   - name: Exchange00
-    x: 256
-    y: 190
+    x: 2
+    y: 614
     width: 84
     height: 84
     borderLeft: 0
@@ -678,22 +548,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: Exchange02
-    x: 161
-    y: 180
+  - name: Exchange02.PNG
+    x: 350
+    y: 624
     width: 94
     height: 94
-    borderLeft: 12
-    borderRight: 12
-    borderTop: 12
-    borderBottom: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: pinzhi001
-    x: 422
-    y: 617
+    x: 84
+    y: 803
     width: 80
     height: 80
     borderLeft: 0
@@ -705,21 +575,21 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pinzhi002
-    x: 665
-    y: 617
+    x: 2
+    y: 864
     width: 80
     height: 80
-    borderLeft: 12
-    borderRight: 12
-    borderTop: 12
-    borderBottom: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: pinzhi003
-    x: 584
-    y: 617
+    x: 2
+    y: 782
     width: 80
     height: 80
     borderLeft: 0
@@ -731,8 +601,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pinzhi004
-    x: 258
-    y: 291
+    x: 84
+    y: 721
     width: 80
     height: 80
     borderLeft: 0
@@ -743,9 +613,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: pinzhi005
-    x: 233
-    y: 99
+  - name: pinzhi005.PNG
+    x: 202
+    y: 681
     width: 80
     height: 80
     borderLeft: 0
@@ -756,9 +626,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: pinzhi006
-    x: 233
-    y: 18
+  - name: pinzhi006.PNG
+    x: 2
+    y: 700
     width: 80
     height: 80
     borderLeft: 0
@@ -770,8 +640,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pinzhi007
-    x: 341
-    y: 617
+    x: 84
+    y: 803
     width: 80
     height: 80
     borderLeft: 0
@@ -782,22 +652,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: Playtable
-    x: 161
-    y: 914
-    width: 279
-    height: 110
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: PropertyBox+
-    x: 764
-    y: 708
+  - name: PropertyBox+.PNG
+    x: 467
+    y: 86
     width: 72
     height: 42
     borderLeft: 0
@@ -808,35 +665,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: PropertyPanel
-    x: 341
-    y: 698
-    width: 200
-    height: 52
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: PropertyPanel+
-    x: 441
-    y: 934
-    width: 280
-    height: 90
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: PropsBox01
-    x: 503
-    y: 617
+  - name: PropsBox01.PNG
+    x: 147
+    y: 885
     width: 80
     height: 80
     borderLeft: 0
@@ -847,22 +678,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: PropsBox03
-    x: 341
-    y: 544
-    width: 72
-    height: 72
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Pull
-    x: 732
-    y: 580
+  - name: Pull.PNG
+    x: 357
+    y: 145
     width: 54
     height: 36
     borderLeft: 0
@@ -873,9 +691,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: Tab01
-    x: 0
-    y: 5
+  - name: Tab01.PNG
+    x: 382
+    y: 356
     width: 127
     height: 58
     borderLeft: 0
@@ -886,22 +704,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: Tab02
-    x: 872
-    y: 751
-    width: 100
+  - name: Tab02.PNG
+    x: 211
+    y: 523
+    width: 101
     height: 58
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 25
+    paddingLeft: 24
     paddingRight: 2
     paddingTop: 0
     paddingBottom: 0
   - name: Tab03
-    x: 914
-    y: 633
+    x: 145
+    y: 320
     width: 82
     height: 64
     borderLeft: 0
@@ -913,8 +731,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Tab04
-    x: 681
-    y: 708
+    x: 468
+    y: 2
     width: 82
     height: 42
     borderLeft: 0
@@ -926,8 +744,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 18
   - name: TabActivity01
-    x: 324
-    y: 843
+    x: 2
+    y: 2
     width: 249
     height: 70
     borderLeft: 0
@@ -939,55 +757,16 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: TabActivity02
-    x: 324
-    y: 772
-    width: 212
+    x: 253
+    y: 2
+    width: 213
     height: 70
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 37
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Tips
-    x: 963
-    y: 949
-    width: 60
-    height: 75
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Title01
-    x: 695
-    y: 760
-    width: 176
-    height: 76
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Title02
-    x: 695
-    y: 837
-    width: 176
-    height: 76
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 36
     paddingTop: 0
     paddingBottom: 0
   mPixelSize: 1
