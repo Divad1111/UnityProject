@@ -50,6 +50,7 @@
      <Compile Include="Assets\Script\UITemplate.cs" />
      <Compile Include="Assets\Tools\AssetsMgr\AssetsMgr.cs" />
      <Compile Include="Assets\Tools\UI\IUIController.cs" />
+     <Compile Include="Assets\Tools\UI\Timer.cs" />
      <Compile Include="Assets\Tools\UI\UIBase.cs" />
      <Compile Include="Assets\Tools\UI\UICfg.cs" />
      <Compile Include="Assets\Tools\UI\UIMgr.cs" />
