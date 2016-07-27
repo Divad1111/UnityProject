@@ -50,8 +50,10 @@
      <Compile Include="Assets\Editor\TestEditor.cs" />
      <Compile Include="Assets\Editor\TestEditorExtension.cs" />
      <Compile Include="Assets\Editor\WizardCreateLight.cs" />
+     <Compile Include="Assets\Tools\AssetsMgr\Editor\TextureImportExt.cs" />
      <Compile Include="Assets\Tools\ThirdPlugin\Editor\DisableCreateSameUITemplate.cs" />
      <Compile Include="Assets\Tools\ThirdPlugin\Editor\UITemplateInspector.cs" />
+     <Compile Include="Assets\Tools\UI\Editor\UIEditorMenuExt.cs" />
      <Compile Include="Assets\Tools\UICodeGenerator\Editor\CodeGeneratorWindow.cs" />
      <Compile Include="Assets\Tools\UICodeGenerator\Editor\CommonDefine.cs" />
      <Compile Include="Assets\Tools\UICodeGenerator\Editor\DefaultNodeConvertor.cs" />

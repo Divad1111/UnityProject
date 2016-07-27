@@ -11,7 +11,7 @@ public class UIMgr : MonoBehaviour
     List<UICfg> _uiStack = new List<UICfg> (10);
 
     //两个UI之间的间距，为了可以放置3D模型，所有UI之间间隔一定距离，所有在制作UI时UI的厚度不能超过UIDistance，也是就是前后各一半UIDistance/2
-    const int UIDistance = 20; 
+    public const int UIDistance = 20; 
 
     public GameObject UIRoot { get; private set; }
 
@@ -101,17 +101,22 @@ public class UIMgr : MonoBehaviour
         GameObject uiRoot = new GameObject ("UI Root");
         uiRoot.transform.position = new Vector3 (2000F, 2000F, 2000F);
 
+        var uiLayerIndex = LayerMask.NameToLayer ("UI");
+        uiRoot.layer = uiLayerIndex;
+            
         //创建并设置相机
         GameObject caremaGo = new GameObject ("Camera");
         var camera = caremaGo.AddComponent<Camera> ();
         camera.orthographic = true;
-        camera.cullingMask = LayerMask.NameToLayer ("UI");
+        camera.cullingMask = 1 << uiLayerIndex;
         camera.clearFlags = CameraClearFlags.Depth;
         camera.nearClipPlane = 0.3F;
         camera.farClipPlane = 1000F;
 
-        caremaGo.AddComponent<PhysicsRaycaster> ();
+        camera.transform.SetParent (uiRoot.transform, false);
+        caremaGo.layer = uiLayerIndex;
 
+        caremaGo.AddComponent<PhysicsRaycaster> ();
     }
 
     public void OpenUI(string name, bool hideSecondaryUI = false, System.Action<GameObject> callback = null)
