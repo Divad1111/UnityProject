@@ -12,9 +12,9 @@ public interface IUIController
 	void OnOpen ();
 	void OnBecomeTopUI (UIType uiType);
 	void OnBecomeSecondaryUI (UIType topUIType, string topUIName);
-	void OnBeforePlayOpenAnimation ();
+	//void OnBeforePlayOpenAnimation ();
 	void OnAfterPlayOpenAnimation();
 	void OnBeforePlayCloseAnimation ();
-	void OnAfterPlayCloseAnimation();
+	//void OnAfterPlayCloseAnimation();
 	void OnClose ();
 }

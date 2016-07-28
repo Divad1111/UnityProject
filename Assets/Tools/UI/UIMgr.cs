@@ -8,9 +8,10 @@ public class UIMgr : MonoBehaviour
 {
     Dictionary<string, UICfg> _uiCacheList = new Dictionary<string, UICfg> ();
 
-    List<UICfg> _uiStack = new List<UICfg> ();
+    List<UICfg> _uiStack = new List<UICfg> (10);
 
-    const int UIInterval = 20;
+    //两个UI之间的间距，为了可以放置3D模型，所有UI之间间隔一定距离，所有在制作UI时UI的厚度不能超过UIDistance，也是就是前后各一半UIDistance/2
+    public const int UIDistance = 20; 
 
     public GameObject UIRoot { get; private set; }
 
@@ -41,7 +42,7 @@ public class UIMgr : MonoBehaviour
         Instance = null;
     }
 
-    public void AddUI(UICfg uiCfg)
+    public void AddUIToCache(UICfg uiCfg)
     {
         if (_uiCacheList.ContainsKey (uiCfg.name))
         {
@@ -53,7 +54,7 @@ public class UIMgr : MonoBehaviour
 
     }
 
-    public void RemoveUI(string name)
+    public void RemoveUIFromCache(string name)
     {
         UICfg cfg;
         if (_uiCacheList.TryGetValue (name, out cfg))
@@ -63,7 +64,7 @@ public class UIMgr : MonoBehaviour
         }
     }
 
-    public UICfg GetUI(string name)
+    public UICfg GetCacheUI(string name)
     {
         UICfg cfg = null;
         _uiCacheList.TryGetValue (name, out cfg);
@@ -86,23 +87,36 @@ public class UIMgr : MonoBehaviour
         }
     }
 
+    public UICfg GetTopUI()
+    {
+        if (!CheckUIStack())
+            return null;
+
+        return _uiStack [_uiStack.Count - 1];
+    }
+
     public static void CreateDefaultUIRoot()
     {
         //创建根对象
         GameObject uiRoot = new GameObject ("UI Root");
         uiRoot.transform.position = new Vector3 (2000F, 2000F, 2000F);
 
+        var uiLayerIndex = LayerMask.NameToLayer ("UI");
+        uiRoot.layer = uiLayerIndex;
+            
         //创建并设置相机
         GameObject caremaGo = new GameObject ("Camera");
         var camera = caremaGo.AddComponent<Camera> ();
         camera.orthographic = true;
-        camera.cullingMask = LayerMask.NameToLayer ("UI");
+        camera.cullingMask = 1 << uiLayerIndex;
         camera.clearFlags = CameraClearFlags.Depth;
         camera.nearClipPlane = 0.3F;
         camera.farClipPlane = 1000F;
 
-        caremaGo.AddComponent<PhysicsRaycaster> ();
+        camera.transform.SetParent (uiRoot.transform, false);
+        caremaGo.layer = uiLayerIndex;
 
+        caremaGo.AddComponent<PhysicsRaycaster> ();
     }
 
     public void OpenUI(string name, bool hideSecondaryUI = false, System.Action<GameObject> callback = null)
@@ -138,26 +152,30 @@ public class UIMgr : MonoBehaviour
             return;
         }
 
-
         _uiStack.Add (uiCfg);
+
+        AdjustDisplayOrder ();
+
         var openingUIController = uiGo.GetComponent<IUIController> ();
         openingUIController.OnOpen ();
-        openingUIController.OnBecomeTopUI (uiCfg.type);
-        //openingUIController.On
+        //openingUIController.OnBecomeTopUI (uiCfg.type);   
 
-        UICfg curUICfg = null;
-        if (_uiStack.Count > 1)
+        if (!string.IsNullOrEmpty (uiCfg.openAni))
         {
-            curUICfg = _uiStack [_uiStack.Count - 1];
-
+            PlayAnimation (uiGo, uiCfg.openAni, (go) =>
+            {
+                openingUIController.OnAfterPlayOpenAnimation ();
+                OnOpen(uiCfg);
+            });    
+        } else
+        {
+            OnOpen(uiCfg);
         }
-
-		
     }
 
     bool CheckUIRoot()
     {
-        return UIRoot == null || UICamera == null;
+        return UIRoot != null && UICamera != null;
     }   
 
     static bool CheckUIInterface(GameObject go)
@@ -174,6 +192,11 @@ public class UIMgr : MonoBehaviour
             return false;
 
         return go.GetComponent<T> () != null;
+    }
+
+    bool CheckUIStack()
+    {
+        return _uiStack != null && _uiStack.Count > 0;
     }
 
     GameObject AddUIToUIRoot(UICfg uiCfg)
@@ -222,7 +245,7 @@ public class UIMgr : MonoBehaviour
 
     void RemoveUIFromUIRoot(string name)
     {
-        if (CheckUIRoot ())
+        if (!CheckUIRoot ())
             return;
 
         var uiGo = UIRoot.transform.FindChild (name);
@@ -246,7 +269,7 @@ public class UIMgr : MonoBehaviour
 
     }
 
-    void PlayAnimation(GameObject go, string name)
+    void PlayAnimation(GameObject go, string name, System.Action<GameObject> callback)
     {
         if (go == null || string.IsNullOrEmpty(name))
             return;
@@ -270,47 +293,164 @@ public class UIMgr : MonoBehaviour
             ani.Stop ();
         
         ani.Play ();
+
+        StartupDelayCallback (animatiinClip.length, go, callback);
     }
 
-    void StartupDelayCallback(float time, System.Action<GameObject> callback)
+    void StartupDelayCallback(float time, GameObject userData, System.Action<GameObject> callback)
     {
-        //StartCoroutine ("Timer", new KeyValuePair<UICfg, System.Action<GameObject>>());
-
+        var timer = gameObject.AddComponent<Timer> ();
+        timer.time = time;
+        timer.userData = userData;
+        timer.OnTimer += (obj) =>
+        {
+            callback(obj as GameObject);
+        };
     }
 
-//    IEnumerator Timer()
-//    {
-//        
-//    }
-
-    void BringToFront(GameObject go)
+    void OnOpen( UICfg openingUICfg )
     {
-        if (go == null)
+        UICfg uiCfg = null;
+        if (_uiStack.Count > 1)
+        {
+            uiCfg = _uiStack [_uiStack.Count - 1];
+
+            if (uiCfg == null || uiCfg.instance == null)
+            {
+                Debug.LogError ("Don't instance object.");
+                return;
+            }
+
+            if (!CheckUIInterface (uiCfg.instance))
+            {
+                Debug.LogError ("Missing component of IUIController.");
+                return;
+            }
+
+            var uiController = uiCfg.instance.GetComponent<IUIController> ();
+            uiController.OnBecomeSecondaryUI (openingUICfg.type, openingUICfg.name);
+        }
+    }
+
+    void BringToFront(string name)
+    {   
+        if (!CheckUIStack ())
+            return;
+        
+        int findUICfgIndex = -1;
+        for (int i = _uiStack.Count - 1; i >= 0; --i)
+        {
+            if (_uiStack [i].name == name)
+            {
+                findUICfgIndex = i;
+                break;
+            }
+        }
+
+        if (findUICfgIndex < 0)
+        {
+            Debug.LogError (name + " isn't in uiStatck. Don't bring to front.");
+            return;
+        }
+
+        var tempCfg = _uiStack [findUICfgIndex];
+        _uiStack.RemoveAt (findUICfgIndex);
+        _uiStack.Add (tempCfg);
+
+        AdjustDisplayOrder ();
+    }
+
+    void AdjustDisplayOrder( )
+    {
+        if (!CheckUIRoot())
+        {
+            Debug.LogError ("Missing UIRoot or camera.");
+            return;
+        }
+
+        if (!CheckUIStack ())
             return;
 
+        for (int i = _uiStack.Count - 1; i >= 0; --i)
+        {
+            var uiCfg = _uiStack [i];
+            var uiGo = uiCfg.instance;
 
-    }
+            //调节UI到相机的距离
+            var canvas = uiGo.GetComponent<Canvas> ();
+            if (canvas == null)
+                continue;
+            
+            if (canvas.worldCamera == null || canvas.worldCamera != UICamera)
+                canvas.worldCamera = UICamera;
 
-    void AdjustDistanceToCamera()
-    {
+            canvas.planeDistance = UIDistance * (_uiStack.Count - i);
 
-    }
-
-    void AdjustTransformOrder()
-    {
-
+            //调节transform顺序
+            uiGo.transform.SetSiblingIndex (i);
+        }
     }
 
     public void Close()
     {
-        
+        if (!CheckUIStack())
+            return;
+
+        var uiCfg = _uiStack [_uiStack.Count - 1];
+
+        Close (uiCfg.name);
     }
 
     public void Close(string name)
     {
+        if (!CheckUIStack ())
+            return;
         
+        for (int i = _uiStack.Count - 1; i >= 0; --i)
+        {
+            var uiCfg = _uiStack [i];
+            if (uiCfg.name != name)
+                continue;
+
+            if (uiCfg.instance == null)
+                continue;
+            
+            if (!CheckUIInterface (uiCfg.instance))
+            {
+                Debug.LogError ("Missing component of IUIController.");
+                continue;
+            }
+
+            _uiStack.RemoveAt (i);
+
+            if (!string.IsNullOrEmpty (uiCfg.closeAni))
+            {
+                var uiController = uiCfg.instance.GetComponent<IUIController> ();
+                uiController.OnBeforePlayCloseAnimation ();
+
+                PlayAnimation (uiCfg.instance, uiCfg.closeAni, (go) =>
+                {
+                    OnClose(uiCfg);
+                });
+            }
+            else
+            {
+                OnClose(uiCfg);
+            }
+        }
     }
 
+    void OnClose(UICfg uiCfg)
+    {
+        var uiController = uiCfg.instance.GetComponent<IUIController> ();
+        if (uiController == null)
+            return;
+        
+        uiController.OnClose ();
 
+        RemoveUIFromUIRoot (uiCfg.name);
+
+        AdjustDisplayOrder ();
+    }
 
 }
