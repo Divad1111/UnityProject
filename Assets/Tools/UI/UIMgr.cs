@@ -116,7 +116,22 @@ public class UIMgr : MonoBehaviour
         camera.transform.SetParent (uiRoot.transform, false);
         caremaGo.layer = uiLayerIndex;
 
-        caremaGo.AddComponent<PhysicsRaycaster> ();
+        var phyRaycaster = caremaGo.AddMissingComponent<PhysicsRaycaster> ();
+        phyRaycaster.eventMask = 1 << uiLayerIndex;
+
+
+        //创建事件系统
+        GameObject eventSystemGo = new GameObject();
+        eventSystemGo.name = "EventSystem";
+        eventSystemGo.layer = uiLayerIndex;
+
+        var eventSystem = eventSystemGo.AddMissingComponent<EventSystem> ();
+        eventSystem.sendNavigationEvents = true;
+        eventSystem.pixelDragThreshold = 5;
+
+        eventSystemGo.AddMissingComponent<StandaloneInputModule> ();
+
+        eventSystemGo.transform.SetParent (uiRoot.transform, false);
     }
 
     public void OpenUI(string name, bool hideSecondaryUI = false, System.Action<GameObject> callback = null)

@@ -49,11 +49,16 @@
      <Compile Include="Assets\Script\Test.cs" />
      <Compile Include="Assets\Script\UITemplate.cs" />
      <Compile Include="Assets\Tools\AssetsMgr\AssetsMgr.cs" />
+     <Compile Include="Assets\Tools\UI\Example\Script\UI1Controller.cs" />
+     <Compile Include="Assets\Tools\UI\Example\Script\UI2Controller.cs" />
+     <Compile Include="Assets\Tools\UI\Example\Script\UI3Controller.cs" />
      <Compile Include="Assets\Tools\UI\IUIController.cs" />
      <Compile Include="Assets\Tools\UI\Timer.cs" />
      <Compile Include="Assets\Tools\UI\UIBase.cs" />
      <Compile Include="Assets\Tools\UI\UICfg.cs" />
+     <Compile Include="Assets\Tools\UI\UIEventListener.cs" />
      <Compile Include="Assets\Tools\UI\UIMgr.cs" />
+     <Compile Include="Assets\Tools\UI\UITools.cs" />
      <Compile Include="Assets\Tools\UICodeGenerator\UICGTools.cs" />
      <None Include="Assets\Tools\readme.txt" />
  <Reference Include="UnityEngine.Networking">
