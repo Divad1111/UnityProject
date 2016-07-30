@@ -6,11 +6,14 @@ public class UI1Controller : MonoBehaviour, IUIController
 {
     Button _btnOpen;
     Button _btnClose;
+    GameObject _cube;
     // Use this for initialization
     void Start () 
     {
         _btnOpen = UITools.Find (transform, "Button(Open)").GetComponent<Button>();
         _btnClose = UITools.Find (transform, "Button(Close)").GetComponent<Button>();
+        _cube = UITools.Find (transform, "Cube").gameObject;
+
 
         UIEventListener.Get (_btnOpen.gameObject).onClick = (go) =>
         {
@@ -20,6 +23,11 @@ public class UI1Controller : MonoBehaviour, IUIController
         UIEventListener.Get (_btnClose.gameObject).onClick = (go) =>
         {
             UIMgr.Instance.Close();
+        };
+
+        UIEventListener.Get (_cube).onClick = (go) =>
+        {
+            Debug.Log("Click Cube.....");
         };
     }
 

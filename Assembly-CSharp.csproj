@@ -49,6 +49,7 @@
      <Compile Include="Assets\Script\Test.cs" />
      <Compile Include="Assets\Script\UITemplate.cs" />
      <Compile Include="Assets\Tools\AssetsMgr\AssetsMgr.cs" />
+     <Compile Include="Assets\Tools\UI\Example\Script\Main.cs" />
      <Compile Include="Assets\Tools\UI\Example\Script\UI1Controller.cs" />
      <Compile Include="Assets\Tools\UI\Example\Script\UI2Controller.cs" />
      <Compile Include="Assets\Tools\UI\Example\Script\UI3Controller.cs" />

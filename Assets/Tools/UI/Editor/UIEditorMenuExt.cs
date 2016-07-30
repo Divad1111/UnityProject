@@ -99,11 +99,9 @@ public static class UIEditorMenuExt
         var go = boxcld.gameObject;
         if (go == null)
             return;
-
-
-        var graphic = go.GetComponent<Graphic> ();
+        
         var rectTransform = go.GetComponent<RectTransform> ();
-        if (graphic == null || rectTransform == null)
+        if (rectTransform == null)
             return;
 
         boxcld.center = CalcColliderCenter(rectTransform);
