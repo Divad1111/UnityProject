@@ -1,5 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text;
+
+
+public enum EffectPlayPosition
+{
+    Front,
+    Middle,
+    Back
+}
 
 public static class UITools
 {
@@ -28,5 +37,41 @@ public static class UITools
         }
 
         return null;
+    }
+
+    public static void PlayEffect(GameObject go, EffectPlayPosition pos, string effectName)
+    {
+        if(go == null)
+        {
+            Debug.LogError ("go is null.");
+            return;
+        }
+
+        if (string.IsNullOrEmpty (effectName))
+        {
+            Debug.LogError ("effectName is empty.");
+            return;
+        }
+
+    }
+
+    public static string GetPath(GameObject go)
+    {
+        if (go == null)
+        {
+            Debug.LogError ("go is null.");
+            return string.Empty;
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.Insert(0, go.name);
+        Transform parent = go.transform.parent;
+        while(parent != null)
+        {
+            sb.Insert(0, parent.name + "/");
+            parent = parent.parent;
+        }
+        return sb.ToString();
     }
 }

@@ -119,6 +119,7 @@ public class UIMgr : MonoBehaviour
         var phyRaycaster = caremaGo.AddMissingComponent<PhysicsRaycaster> ();
         phyRaycaster.eventMask = 1 << uiLayerIndex;
 
+        var debuger = caremaGo.AddMissingComponent<UIDebuger> ();
 
         //创建事件系统
         GameObject eventSystemGo = new GameObject();
@@ -152,6 +153,12 @@ public class UIMgr : MonoBehaviour
             return;
         }
 
+        if (IsInUIStack (name))
+        {
+            Debug.LogError (string.Format("Exist same UI of {0} in UIStack.", name));
+            return;
+        }
+
         var uiGo = AddUIToUIRoot (uiCfg);
         if (uiGo == null)
         {
@@ -177,7 +184,6 @@ public class UIMgr : MonoBehaviour
             Debug.LogError ("Missing component of Canvas.");
             return;
         }
-
 
 
         var openingUIController = uiGo.GetComponent<IUIController> ();
@@ -217,6 +223,17 @@ public class UIMgr : MonoBehaviour
             return false;
 
         return go.layer == LayerMask.NameToLayer (targetLayerName);
+    }
+
+    bool IsInUIStack(string name)
+    {
+        for (int i = _uiStack.Count - 1; i >= 0; --i)
+        {
+            if (_uiStack [i].name == name)
+                return true;
+        }
+
+        return false;
     }
 
     static bool CheckUIInterface(GameObject go)

@@ -57,6 +57,7 @@
      <Compile Include="Assets\Tools\UI\Timer.cs" />
      <Compile Include="Assets\Tools\UI\UIBase.cs" />
      <Compile Include="Assets\Tools\UI\UICfg.cs" />
+     <Compile Include="Assets\Tools\UI\UIDebuger.cs" />
      <Compile Include="Assets\Tools\UI\UIEventListener.cs" />
      <Compile Include="Assets\Tools\UI\UIMgr.cs" />
      <Compile Include="Assets\Tools\UI\UITools.cs" />
