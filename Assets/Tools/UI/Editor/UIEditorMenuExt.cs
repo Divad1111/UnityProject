@@ -91,7 +91,7 @@ public static class UIEditorMenuExt
 
     }
 
-    static void AdjustBoxColliderSize(BoxCollider boxcld)
+    public static void AdjustBoxColliderSize(BoxCollider boxcld)
     {
         if (boxcld == null)
             return;

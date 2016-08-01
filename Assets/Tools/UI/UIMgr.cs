@@ -119,7 +119,7 @@ public class UIMgr : MonoBehaviour
         var phyRaycaster = caremaGo.AddMissingComponent<PhysicsRaycaster> ();
         phyRaycaster.eventMask = 1 << uiLayerIndex;
 
-        var debuger = caremaGo.AddMissingComponent<UIDebuger> ();
+        caremaGo.AddMissingComponent<UIDebuger> ();
 
         //创建事件系统
         GameObject eventSystemGo = new GameObject();
@@ -274,7 +274,7 @@ public class UIMgr : MonoBehaviour
             if (uiCfg.isCacheAsset)
             {   
                 uiCfg.Load ();
-                uiPrefab = uiCfg.instance;
+                uiPrefab = uiCfg.prefab;
             }
             else
             {
@@ -313,9 +313,12 @@ public class UIMgr : MonoBehaviour
         UICfg uiCfg = null;
         if (_uiCacheList.TryGetValue (name, out uiCfg))
         {
-            uiCfg.instance = null;
+            if (uiCfg.instance != null)
+            {
+                GameObject.DestroyImmediate (uiCfg.instance, true);
+                uiCfg.instance = null;
+            }
         }
-        GameObject.DestroyImmediate (uiGo.gameObject);
     }
 
     bool CheckSameName(Transform go, string name)
@@ -511,8 +514,11 @@ public class UIMgr : MonoBehaviour
 
         RemoveFromUIStack(uiCfg.name);
 
-        AdjustDisplayOrder ();
+        AdjustDisplayOrder ();      
 
+        Resources.UnloadUnusedAssets ();
+
+        System.GC.Collect ();
 
         UICfg newTopUICfg = null;
         if (_uiStack.Count > 0)
