@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 public class TestCon : MonoBehaviour {
 
@@ -19,7 +20,8 @@ public class TestCon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        
+
         Debug.Log ("XXXXXXX");
         if(_isFirstUpdate)
             StartCoroutine(Test());

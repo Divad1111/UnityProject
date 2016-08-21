@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ui1
+      Dependencies:
+        Dependency_0: ui1texture
+    Info_1:
+      Name: ui1texture
+      Dependencies: {}

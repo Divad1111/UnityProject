@@ -123,4 +123,10 @@ public static class UIEditorMenuExt
             AdjustBoxColliderSize (collider);
         }
     }
+
+    [MenuItem("GameObject/AssetBundle/Create")]
+    static void AssetBundleCreate()
+    {
+        BuildPipeline.BuildAssetBundles ("Assets/AssetBundle/");
+    }
 }
