@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIEventListener : EventTrigger
+public class UIEvtListener : EventTrigger
 {
     public delegate void VoidDelegate (GameObject go);
     public delegate void BoolDelegate (GameObject go, bool state);
@@ -40,10 +40,10 @@ public class UIEventListener : EventTrigger
 //    void OnTooltip (bool show)      { if (isColliderEnabled && onTooltip != null) onTooltip(gameObject, show); }
   
 
-    static public UIEventListener Get (GameObject go)
+    static public UIEvtListener Get (GameObject go)
     {
-        UIEventListener listener = go.GetComponent<UIEventListener>();
-        if (listener == null) listener = go.AddComponent<UIEventListener>();
+        UIEvtListener listener = go.GetComponent<UIEvtListener>();
+        if (listener == null) listener = go.AddComponent<UIEvtListener>();
         return listener;
     }
 

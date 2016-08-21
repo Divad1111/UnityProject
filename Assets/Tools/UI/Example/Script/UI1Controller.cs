@@ -15,17 +15,17 @@ public class UI1Controller : MonoBehaviour, IUIController
         _cube = UITools.Find (transform, "Cube").gameObject;
 
 
-        UIEventListener.Get (_btnOpen.gameObject).onClick = (go) =>
+        UIEvtListener.Get (_btnOpen.gameObject).onClick = (go) =>
         {
             UIMgr.Instance.OpenUI("UI2");
         };
 
-        UIEventListener.Get (_btnClose.gameObject).onClick = (go) =>
+        UIEvtListener.Get (_btnClose.gameObject).onClick = (go) =>
         {
             UIMgr.Instance.Close();
         };
 
-        UIEventListener.Get (_cube).onClick = (go) =>
+        UIEvtListener.Get (_cube).onClick = (go) =>
         {
             Debug.Log("Click Cube.....");
         };

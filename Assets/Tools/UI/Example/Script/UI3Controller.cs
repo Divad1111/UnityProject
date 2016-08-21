@@ -12,12 +12,12 @@ public class UI3Controller : MonoBehaviour, IUIController
         _btnOpen = UITools.Find (transform, "Button(Open)").GetComponent<Button>();
         _btnClose = UITools.Find (transform, "Button(Close)").GetComponent<Button>();
 
-        UIEventListener.Get (_btnOpen.gameObject).onClick = (go) =>
+        UIEvtListener.Get (_btnOpen.gameObject).onClick = (go) =>
         {
             //UIMgr.Instance.OpenUI("UI2");
         };
 
-        UIEventListener.Get (_btnClose.gameObject).onClick = (go) =>
+        UIEvtListener.Get (_btnClose.gameObject).onClick = (go) =>
         {
             UIMgr.Instance.Close();
         };
