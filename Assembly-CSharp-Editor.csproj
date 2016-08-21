@@ -66,19 +66,6 @@
      <Compile Include="Assets\Tools\UICodeGenerator\Editor\Node.cs" />
      <Compile Include="Assets\Tools\UICodeGenerator\Editor\Parser.cs" />
      <Compile Include="Assets\Tools\UICodeGenerator\Editor\Utility.cs" />
-     <Compile Include="Assets\uLua\Editor\BindLua.cs" />
-     <Compile Include="Assets\uLua\Editor\WelcomeScreen.cs" />
-     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_System_Delegate.cs" />
-     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_System_Enum.cs" />
-     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_System_Object.cs" />
-     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_System_String.cs" />
-     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_System_Type.cs" />
-     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_UnityEngine_Object.cs" />
-     <Compile Include="Assets\uLua\Editor\WrapFile.cs" />
-     <None Include="Assets\uLua\README.txt" />
-     <None Include="Assets\uLua\Examples\A4_ButtonClick\ReadMe.txt" />
-     <None Include="Assets\uLua\Examples\04_ScriptsFromFile\ScriptsFromFile01.lua.txt" />
-     <None Include="Assets\uLua\Lua\System\readme.txt" />
      <None Include="Assets\Tools\readme.txt" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
