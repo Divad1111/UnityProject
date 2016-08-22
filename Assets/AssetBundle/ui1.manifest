@@ -1,0 +1,66 @@
+ManifestFileVersion: 0
+CRC: 161523121
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: af49e3f24911ea4ec5ed97ec63328d6b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: dd4c78bdf0eb6ea445a7582b1d4d5d1d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: -98529514, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 97035374836b44b7f8220485b2f6bcfd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3ab144452b9874fc6b475e0add5c7165, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c9d585b6b586a4bbdb902b32caa867b4, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Tools/UI/Example/Resources/UIPrefab/UI1.prefab
+- Assets/Tools/UI/Example/Resources/UIPrefab/UI2.prefab
+Dependencies:
+- Assets/AssetBundle/ui1texture

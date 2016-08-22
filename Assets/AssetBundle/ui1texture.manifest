@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 1048659182
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6368499496c1a514cf2c785f4d270448
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6759894fca659e2049f05064db45ce61
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/Tools/UI/Example/Texture/bg_3.jpg
+- Assets/Tools/UI/Example/Texture/bg_2.jpg
+- Assets/Tools/UI/Example/Texture/1.jpg
+Dependencies: []

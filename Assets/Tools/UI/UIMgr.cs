@@ -13,9 +13,9 @@ public class UIMgr : MonoBehaviour
     //两个UI之间的间距，为了可以放置3D模型，所有UI之间间隔一定距离，所有在制作UI时UI的厚度不能超过UIDistance，也是就是前后各一半UIDistance/2
     public const int UIDistance = 20; 
 
-    public GameObject UIRoot { get; private set; }
+    public static GameObject UIRoot { get; private set; }
 
-    public Camera UICamera { get; private set; }
+    public static Camera UICamera { get; private set; }
 
 
 
@@ -116,8 +116,30 @@ public class UIMgr : MonoBehaviour
         camera.transform.SetParent (uiRoot.transform, false);
         caremaGo.layer = uiLayerIndex;
 
-        caremaGo.AddComponent<PhysicsRaycaster> ();
+        var phyRaycaster = caremaGo.AddMissingComponent<PhysicsRaycaster> ();
+        phyRaycaster.eventMask = 1 << uiLayerIndex;
+
+        caremaGo.AddMissingComponent<UIDebuger> ();
+
+        //创建事件系统
+        GameObject eventSystemGo = new GameObject();
+        eventSystemGo.name = "EventSystem";
+        eventSystemGo.layer = uiLayerIndex;
+
+        var eventSystem = eventSystemGo.AddMissingComponent<EventSystem> ();
+        eventSystem.sendNavigationEvents = true;
+        eventSystem.pixelDragThreshold = 5;
+
+        eventSystemGo.AddMissingComponent<StandaloneInputModule> ();
+
+        eventSystemGo.transform.SetParent (uiRoot.transform, false);
+
+        //保存UIRoot和UI相机
+        UIRoot = uiRoot;
+        UICamera = camera;
     }
+
+
 
     public void OpenUI(string name, bool hideSecondaryUI = false, System.Action<GameObject> callback = null)
     {
@@ -131,11 +153,22 @@ public class UIMgr : MonoBehaviour
             return;
         }
 
+        if (IsInUIStack (name))
+        {
+            Debug.LogError (string.Format("Exist same UI of {0} in UIStack.", name));
+            return;
+        }
+
         var uiGo = AddUIToUIRoot (uiCfg);
         if (uiGo == null)
         {
             Debug.LogError ("Don't add ui to UIRoot.");
             return;
+        }
+
+        if (!CheckLayer (uiGo, "UI"))
+        {
+            Debug.LogError ("Not in layer of UI.");
         }
 
         if (!CheckUIInterface (uiGo))
@@ -152,31 +185,56 @@ public class UIMgr : MonoBehaviour
             return;
         }
 
+
+        var openingUIController = uiGo.GetComponent<IUIController> ();
+        openingUIController.OnOpen ();
+
         _uiStack.Add (uiCfg);
 
         AdjustDisplayOrder ();
 
-        var openingUIController = uiGo.GetComponent<IUIController> ();
-        openingUIController.OnOpen ();
-        //openingUIController.OnBecomeTopUI (uiCfg.type);   
-
         if (!string.IsNullOrEmpty (uiCfg.openAni))
         {
-            PlayAnimation (uiGo, uiCfg.openAni, (go) =>
+            bool playSuccess = PlayAnimation (uiGo, uiCfg.openAni, (go) =>
             {
                 openingUIController.OnAfterPlayOpenAnimation ();
                 OnOpen(uiCfg);
-            });    
+            });   
+
+            if (!playSuccess)
+            {
+                openingUIController.OnAfterPlayOpenAnimation ();
+                OnOpen (uiCfg);
+            }
         } else
         {
             OnOpen(uiCfg);
         }
     }
 
-    bool CheckUIRoot()
+    static bool CheckUIRoot()
     {
         return UIRoot != null && UICamera != null;
     }   
+
+    static bool CheckLayer(GameObject go, string targetLayerName)
+    {
+        if (go == null)
+            return false;
+
+        return go.layer == LayerMask.NameToLayer (targetLayerName);
+    }
+
+    bool IsInUIStack(string name)
+    {
+        for (int i = _uiStack.Count - 1; i >= 0; --i)
+        {
+            if (_uiStack [i].name == name)
+                return true;
+        }
+
+        return false;
+    }
 
     static bool CheckUIInterface(GameObject go)
     {
@@ -204,19 +262,19 @@ public class UIMgr : MonoBehaviour
         if (uiCfg == null)
             return null;
 
-        if (!CheckSmaeName (UIRoot.transform, uiCfg.name))
+        if (!CheckSameName (UIRoot.transform, uiCfg.name))
         {
             Debug.LogError ("There be same ui name in UIRoot.");
             return null;
         }
 
-        GameObject uiPrefab = null;
+        GameObject uiPrefab = uiCfg.prefab;
         if (uiCfg.prefab == null)
         {
             if (uiCfg.isCacheAsset)
             {   
                 uiCfg.Load ();
-                uiPrefab = uiCfg.instance;
+                uiPrefab = uiCfg.prefab;
             }
             else
             {
@@ -255,12 +313,15 @@ public class UIMgr : MonoBehaviour
         UICfg uiCfg = null;
         if (_uiCacheList.TryGetValue (name, out uiCfg))
         {
-            uiCfg.instance = null;
+            if (uiCfg.instance != null)
+            {
+                GameObject.DestroyImmediate (uiCfg.instance, true);
+                uiCfg.instance = null;
+            }
         }
-        GameObject.DestroyImmediate (uiGo.gameObject);
     }
 
-    bool CheckSmaeName(Transform go, string name)
+    bool CheckSameName(Transform go, string name)
     {
         if (go == null)
             return false;
@@ -269,32 +330,32 @@ public class UIMgr : MonoBehaviour
 
     }
 
-    void PlayAnimation(GameObject go, string name, System.Action<GameObject> callback)
+    bool PlayAnimation(GameObject go, string name, System.Action<GameObject> callback)
     {
         if (go == null || string.IsNullOrEmpty(name))
-            return;
+            return false;
 
-        var animatiinClip = AssetsMgr.Instance.LoadUIAnimation (name);
-        if (animatiinClip == null)
+        var animationClip = AssetsMgr.Instance.LoadUIAnimation (name);
+        if (animationClip == null)
         {
             Debug.LogError ("Loading ui animation is failed.");
-            return;
+            return false;
         }
-        
-        Animation ani = go.GetComponent<Animation>();
-        if(ani == null)
-            ani = go.AddComponent<Animation> ();
 
+        Animation ani = go.AddMissingComponent<Animation> ();
         ani.playAutomatically = false;
         ani.cullingType = AnimationCullingType.AlwaysAnimate;
-        ani.clip = animatiinClip;
+        ani.AddClip (animationClip, name);
+        ani.clip = animationClip;
 
         if (ani.isPlaying)
             ani.Stop ();
         
         ani.Play ();
 
-        StartupDelayCallback (animatiinClip.length, go, callback);
+        StartupDelayCallback (animationClip.length, go, callback);
+
+        return true;
     }
 
     void StartupDelayCallback(float time, GameObject userData, System.Action<GameObject> callback)
@@ -313,7 +374,7 @@ public class UIMgr : MonoBehaviour
         UICfg uiCfg = null;
         if (_uiStack.Count > 1)
         {
-            uiCfg = _uiStack [_uiStack.Count - 1];
+            uiCfg = _uiStack [_uiStack.Count - 2];
 
             if (uiCfg == null || uiCfg.instance == null)
             {
@@ -421,17 +482,18 @@ public class UIMgr : MonoBehaviour
                 continue;
             }
 
-            _uiStack.RemoveAt (i);
-
             if (!string.IsNullOrEmpty (uiCfg.closeAni))
             {
                 var uiController = uiCfg.instance.GetComponent<IUIController> ();
                 uiController.OnBeforePlayCloseAnimation ();
 
-                PlayAnimation (uiCfg.instance, uiCfg.closeAni, (go) =>
+                bool playSuccess = PlayAnimation (uiCfg.instance, uiCfg.closeAni, (go) =>
                 {
                     OnClose(uiCfg);
                 });
+
+                if (!playSuccess)
+                    OnClose (uiCfg);
             }
             else
             {
@@ -450,7 +512,45 @@ public class UIMgr : MonoBehaviour
 
         RemoveUIFromUIRoot (uiCfg.name);
 
-        AdjustDisplayOrder ();
+        RemoveFromUIStack(uiCfg.name);
+
+        AdjustDisplayOrder ();      
+
+        Resources.UnloadUnusedAssets ();
+
+        System.GC.Collect ();
+
+        UICfg newTopUICfg = null;
+        if (_uiStack.Count > 0)
+        {
+            newTopUICfg = _uiStack [_uiStack.Count - 1];
+
+            if (newTopUICfg == null || newTopUICfg.instance == null)
+            {
+                Debug.LogError ("Don't instance object.");
+                return;
+            }
+
+            if (!CheckUIInterface (newTopUICfg.instance))
+            {
+                Debug.LogError ("Missing component of IUIController.");
+                return;
+            }
+
+            var newTopUIController = newTopUICfg.instance.GetComponent<IUIController> ();
+            newTopUIController.OnBecomeTopUI (newTopUICfg.type);
+        }
+    }
+
+    void RemoveFromUIStack(string name)
+    {
+        for (int i = _uiStack.Count - 1; i >= 0; --i)
+        {
+            if (_uiStack [i].name == name)
+            {
+                _uiStack.RemoveAt (i);
+            }
+        }
     }
 
 }

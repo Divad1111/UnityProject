@@ -26,4 +26,8 @@ public class AssetsMgr
     {
         return Resources.Load<AnimationClip> (string.Format ("UIAnimation/{0}", name));
     }
+
+
+
+
 }
