@@ -334,7 +334,7 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols:
-    1: UGUI
+    1: NGUI
     4: 
   metroPackageName: MyPlugin
   metroPackageVersion: 
