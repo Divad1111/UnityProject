@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour 
 {
+    UIMgr _uiMgr;
     void Awake()
     {
         
@@ -12,15 +13,23 @@ public class Main : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        var uiMgr = gameObject.AddMissingComponent<UIMgr> ();
-        uiMgr.AddUIToCache (new UICfg ("UI1", UIType.Normal, "", "", true));
-        uiMgr.AddUIToCache (new UICfg ("UI2", UIType.Normal, "", "", false));
-        uiMgr.AddUIToCache (new UICfg ("UI3", UIType.Normal, "Open", "Close", true));
+        _uiMgr = gameObject.AddMissingComponent<UIMgr> ();
+        _uiMgr.AddUIToCache (new UICfg ("UI1", UIType.Normal, "", "", false));
+        _uiMgr.AddUIToCache (new UICfg ("UI2", UIType.Normal, "", "", false));
+        _uiMgr.AddUIToCache (new UICfg ("UI3", UIType.Normal, "Open", "Close", false));
 
-        uiMgr.Load ();
+        _uiMgr.Load ();
 
-        uiMgr.OpenUI ("UI1");
+        //uiMgr.OpenUI ("UI1");
 	}
+
+    void OnGUI()
+    {
+        if(GUILayout.Button("OpenUI1"))
+        {
+            _uiMgr.OpenUI ("UI1");
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () 

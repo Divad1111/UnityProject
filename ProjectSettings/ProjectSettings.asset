@@ -336,6 +336,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: UGUI
     4: 
+    7: UGUI
   metroPackageName: MyPlugin
   metroPackageVersion: 
   metroCertificatePath: 
