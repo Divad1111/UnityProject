@@ -12,6 +12,7 @@ public enum EffectPlayPosition
 
 public static class UITools
 {
+#if UGUI
     public static T AddMissingComponent<T>(this GameObject go) where T:Component
     {
         T com = go.GetComponent<T> ();
@@ -20,6 +21,7 @@ public static class UITools
         
         return go.AddComponent<T> ();
     }
+#endif
 
     public static Transform Find(Transform parent, string name)
     {
