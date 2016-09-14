@@ -23,7 +23,7 @@ public class Test : EventTrigger {
 	{
 		var canvasRect = GetComponentInParent<RectTransform> ();
 
-      
+
 		print ("ScreenWidth: " + Screen.width);
 		print ("ScreenHeight: " + Screen.height);
 		print ("CavasWidth: " + canvasRect.rect.width);
