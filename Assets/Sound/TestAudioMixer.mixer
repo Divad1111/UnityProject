@@ -31,8 +31,8 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 61530ab65486843b69fa61f6ef6aaa24
   m_Children:
-  - {fileID: 24323948}
   - {fileID: 24345548}
+  - {fileID: 24323948}
   m_Volume: 30bc80169dd6447dc88ab7d2c16bf305
   m_Pitch: 5504e37c186c14b5688ab55c076fee2a
   m_Effects:
@@ -110,7 +110,7 @@ AudioMixerEffectController:
   - m_ParameterName: Wetmix
     m_GUID: 6cc77bd2b34894a22abc3324ceb09f9e
   m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 1
+  m_EnableWetMix: 0
   m_Bypass: 0
 --- !u!244 &24451202
 AudioMixerEffectController:
@@ -147,7 +147,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: e080c5494222f4e8e94941bdecf2dd9e
   m_FloatValues:
-    450a7a310b35c44eb989619117315b89: 198
+    450a7a310b35c44eb989619117315b89: 1149
     935a2da271abf40978045f180c5c95b3: -13.942131
     8c1f7924ae0e6457e858a54372abab73: -5.824182
     30bc80169dd6447dc88ab7d2c16bf305: 0.025578512
