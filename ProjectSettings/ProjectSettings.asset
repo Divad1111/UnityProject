@@ -334,7 +334,7 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols:
-    1: NGUI
+    1: UGUI
     4: 
     7: UGUI
   metroPackageName: MyPlugin
@@ -422,15 +422,23 @@ PlayerSettings:
   XboxOnePersistentLocalStorageSize: 0
   intPropertyNames:
   - Android::ScriptingBackend
+  - Metro::ScriptingBackend
   - Standalone::ScriptingBackend
   - iOS::Architecture
   - iOS::EnableIncrementalBuildSupportForIl2cpp
   - iOS::ScriptingBackend
+  - tvOS::Architecture
+  - tvOS::EnableIncrementalBuildSupportForIl2cpp
+  - tvOS::ScriptingBackend
   Android::ScriptingBackend: 0
+  Metro::ScriptingBackend: 2
   Standalone::ScriptingBackend: 0
   iOS::Architecture: 0
   iOS::EnableIncrementalBuildSupportForIl2cpp: 1
   iOS::ScriptingBackend: 0
+  tvOS::Architecture: 1
+  tvOS::EnableIncrementalBuildSupportForIl2cpp: 0
+  tvOS::ScriptingBackend: 1
   boolPropertyNames: []
   stringPropertyNames: []
   cloudProjectId: 

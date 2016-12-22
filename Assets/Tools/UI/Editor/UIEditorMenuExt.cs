@@ -56,25 +56,49 @@ public static class UIEditorMenuExt
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/Label &#l")]
     static void Label()
     {
+        var selectedObject = Selection.activeTransform;
         EditorApplication.ExecuteMenuItem ("GameObject/UI/Text");
+
+        if (selectedObject != null)
+        {
+            Selection.activeTransform.SetParent(selectedObject);
+        }
     }
 
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/Sprite &#s")]
     static void Sprite()
     {
+        var selectedObject = Selection.activeTransform;
         EditorApplication.ExecuteMenuItem ("GameObject/UI/Image");
+
+        if (selectedObject != null)
+        {
+            Selection.activeTransform.SetParent(selectedObject);
+        }
     }
 
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/Texture &#t")]
     static void Texture()
     {
+        var selectedObject = Selection.activeTransform;
         EditorApplication.ExecuteMenuItem ("GameObject/UI/Raw Image");
+
+        if (selectedObject != null)
+        {
+            Selection.activeTransform.SetParent(selectedObject);
+        }
     }
 
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/Button &#b")]
     static void Button()
     {
+        var selectedObject = Selection.activeTransform;
         EditorApplication.ExecuteMenuItem ("GameObject/UI/Button");
+
+        if (selectedObject != null)
+        {
+            Selection.activeTransform.SetParent(selectedObject);
+        }
     }
 
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/BoxCollider &#c")]
