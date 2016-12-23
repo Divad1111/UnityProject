@@ -95,6 +95,12 @@ public static class UITools
         boxcld.isTrigger = true;
     }
 
+    public static IEnumerator DelayCallback(float delay, System.Action callback)
+    {
+        yield return new WaitForSeconds(delay);
+        callback();
+    }
+
     /// <summary>
     /// Add a new child game object.
     /// </summary>
