@@ -25,16 +25,18 @@ public static class UIEditorMenuExt
         canvasGo.name = "Canvas";
         canvasGo.layer = LayerMask.NameToLayer ("UI");
 
-        var canvas = canvasGo.AddComponent<Canvas> ();
+        var canvas = canvasGo.AddMissingComponent<Canvas> ();
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = canvasCamera;
         canvas.planeDistance = UIMgr.UIDistance;
 
-        var canvasScaler = canvasGo.AddComponent<CanvasScaler> ();
+        var canvasScaler = canvasGo.AddMissingComponent<CanvasScaler> ();
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         canvasScaler.referenceResolution = new Vector2 (1280, 720);
         canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
         canvasScaler.matchWidthOrHeight = 0F;
+
+        canvasGo.AddMissingComponent<GraphicRaycaster>();
 
         canvasGo.transform.SetParent (Selection.activeGameObject.transform, false);
     }

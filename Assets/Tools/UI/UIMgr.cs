@@ -116,8 +116,8 @@ public class UIMgr : MonoBehaviour
         camera.transform.SetParent (uiRoot.transform, false);
         caremaGo.layer = uiLayerIndex;
 
-        var phyRaycaster = caremaGo.AddMissingComponent<PhysicsRaycaster> ();
-        phyRaycaster.eventMask = 1 << uiLayerIndex;
+        //var phyRaycaster = caremaGo.AddMissingComponent<PhysicsRaycaster> ();
+        //phyRaycaster.eventMask = 1 << uiLayerIndex;
 
         caremaGo.AddMissingComponent<UIDebuger> ();
 
