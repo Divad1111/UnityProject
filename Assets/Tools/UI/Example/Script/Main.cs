@@ -13,7 +13,11 @@ public class Main : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        _uiMgr = gameObject.AddMissingComponent<UIMgr> ();
+		
+		if (gameObject.GetComponent<UIMgr>() == null)
+		{
+			_uiMgr = gameObject.AddComponent<UIMgr> ();
+		}
         _uiMgr.AddUIToCache (new UICfg ("UI1", UIType.Normal, "", "", false));
         _uiMgr.AddUIToCache (new UICfg ("UI2", UIType.Normal, "", "", false));
         _uiMgr.AddUIToCache (new UICfg ("UI3", UIType.Normal, "Open", "Close", false));

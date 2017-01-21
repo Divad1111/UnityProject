@@ -153,6 +153,6 @@ public static class UIEditorMenuExt
     [MenuItem("GameObject/AssetBundle/Create")]
     static void AssetBundleCreate()
     {
-        BuildPipeline.BuildAssetBundles ("Assets/AssetBundle/");
+       // BuildPipeline.BuildAssetBundles ("Assets/AssetBundle/");
     }
 }
