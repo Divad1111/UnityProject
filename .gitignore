@@ -14,3 +14,5 @@ UnityVS.meta
 /UnityVS.UnityProject.CSharp.Editor.csproj
 /UnityVS.UnityProject.sln
 obj
+.vs
+*.csproj
