@@ -504,6 +504,12 @@ public class UIMgr : MonoBehaviour
 
     void OnClose(UICfg uiCfg)
     {
+    	if (uiCfg == null || uiCfg.instance == null)
+    	{
+    		Debug.LogError("uiCfg or uiCfg.instance is null");
+    		return;
+    	}
+
         var uiController = uiCfg.instance.GetComponent<IUIController> ();
         if (uiController == null)
             return;
