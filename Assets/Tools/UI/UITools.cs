@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
+using UnityEngine.UI;
 
 
 public enum EffectPlayPosition
@@ -40,6 +41,31 @@ public static class UITools
 
         return null;
     }
+
+    public static void InitDefaultParamForCanvas(GameObject canvasGo, Camera canvasCamera)
+    {
+        if (canvasGo == null || canvasCamera == null)
+        {
+            Debug.LogWarning("canvasGo or canvasCamera is null.");
+            return;
+        }   
+
+        canvasGo.layer = LayerMask.NameToLayer("UI");
+
+        var canvas = canvasGo.AddMissingComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = canvasCamera;
+        canvas.planeDistance = canvasCamera.farClipPlane;
+
+        var canvasScaler = canvasGo.AddMissingComponent<CanvasScaler>();
+        canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvasScaler.referenceResolution = new Vector2(1280, 720);
+        canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+        canvasScaler.matchWidthOrHeight = 0F;
+
+        canvasGo.AddMissingComponent<GraphicRaycaster>();
+    }
+
 
     public static void PlayEffect(GameObject go, EffectPlayPosition pos, string effectName)
     {

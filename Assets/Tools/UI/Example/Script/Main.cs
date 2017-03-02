@@ -31,7 +31,7 @@ public class Main : MonoBehaviour
     {
         if(GUILayout.Button("OpenUI1"))
         {
-            _uiMgr.OpenUI ("UI1");
+            _uiMgr.Open ("UI1");
         }
     }
 	

@@ -14,7 +14,7 @@ public class UI2Controller : MonoBehaviour, IUIController
 
         UIEvtListener.Get (_btnOpen.gameObject).onClick = (go) =>
         {
-            UIMgr.Instance.OpenUI("UI3");
+            UIMgr.Instance.Open("UI3");
         };
 
         UIEvtListener.Get (_btnClose.gameObject).onClick = (go) =>

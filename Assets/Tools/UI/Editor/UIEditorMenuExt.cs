@@ -13,32 +13,20 @@ public static class UIEditorMenuExt
 
     [MenuItem("GameObject/UI/Tools/Canvas")]
     static void CreateDefaultCanvas()
-    {        
+    {
         if (!CheckCreateDefaultCanvas())
         {
             return;
         }
 
-        var canvasCamera = Selection.activeGameObject.GetComponentInChildren<Camera> (true);
-            
-        GameObject canvasGo = new GameObject ();
+        var canvasCamera = Selection.activeGameObject.GetComponentInChildren<Camera>(true);
+
+        GameObject canvasGo = new GameObject();
         canvasGo.name = "Canvas";
-        canvasGo.layer = LayerMask.NameToLayer ("UI");
 
-        var canvas = canvasGo.AddMissingComponent<Canvas> ();
-        canvas.renderMode = RenderMode.ScreenSpaceCamera;
-        canvas.worldCamera = canvasCamera;
-        canvas.planeDistance = UIMgr.UIDistance;
+        UITools.InitDefaultParamForCanvas(canvasGo, canvasCamera);
 
-        var canvasScaler = canvasGo.AddMissingComponent<CanvasScaler> ();
-        canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        canvasScaler.referenceResolution = new Vector2 (1280, 720);
-        canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-        canvasScaler.matchWidthOrHeight = 0F;
-
-        canvasGo.AddMissingComponent<GraphicRaycaster>();
-
-        canvasGo.transform.SetParent (Selection.activeGameObject.transform, false);
+        canvasGo.transform.SetParent(Selection.activeGameObject.transform, false);
     }
 
     [MenuItem("GameObject/UI/Tools/Canvas", true)]
@@ -54,7 +42,6 @@ public static class UIEditorMenuExt
         return false;
     }
 
-  
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/Label &#l")]
     static void Label()
     {
