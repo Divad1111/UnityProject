@@ -29,6 +29,12 @@ public class UIMgr : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null)
+        {
+            DestroyImmediate(Instance);
+            Debug.LogError("Don't exist multiple UIMgr!");
+        }
+
         Instance = this;
     }
 
