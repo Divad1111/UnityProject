@@ -11,36 +11,74 @@ public static class UIEditorMenuExt
         UIMgr.CreateDefaultUIRoot ();
     }
 
-    [MenuItem("GameObject/UI/Tools/Canvas")]
-    static void CreateDefaultCanvas()
+    //[MenuItem("GameObject/UI/Tools/Canvas")]
+    //static void CreateDefaultCanvas()
+    //{
+    //    if (!CheckCreateDefaultCanvas())
+    //    {
+    //        return;
+    //    }
+
+    //    var canvasCamera = Selection.activeGameObject.GetComponentInChildren<Camera>(true);
+
+    //    GameObject canvasGo = new GameObject();
+    //    canvasGo.name = "Canvas";
+
+    //    UITools.InitDefaultParamForCanvas(canvasGo, canvasCamera);
+
+    //    canvasGo.transform.SetParent(Selection.activeGameObject.transform, false);
+    //}
+
+    //[MenuItem("GameObject/UI/Tools/Canvas", true)]
+    //static bool CheckCreateDefaultCanvas()
+    //{
+    //    if (Selection.gameObjects.Length != 1)
+    //        return false;
+
+    //    var selectedName = Selection.activeGameObject.name;
+    //    if (selectedName == "UI Root")
+    //        return true;
+
+    //    return false;
+    //}
+
+    [MenuItem("GameObject/UI/Tools/New UI")]
+    static void CreateNewUI()
     {
-        if (!CheckCreateDefaultCanvas())
+        if (!CheckCreateNewUI())
         {
+            Debug.LogWarning("创建UI必须选择一个Canvas!");
             return;
         }
+        
 
-        var canvasCamera = Selection.activeGameObject.GetComponentInChildren<Camera>(true);
-
-        GameObject canvasGo = new GameObject();
-        canvasGo.name = "Canvas";
-
-        UITools.InitDefaultParamForCanvas(canvasGo, canvasCamera);
-
-        canvasGo.transform.SetParent(Selection.activeGameObject.transform, false);
+        GameObject newUIGo = new GameObject();
+        newUIGo.name = "New UI";
+        var rectTrans = newUIGo.AddComponent<RectTransform>();
+        rectTrans.SetParent(Selection.activeGameObject.transform);
+        rectTrans.localPosition = Vector3.zero;
+        rectTrans.localScale = Vector3.one;
+        rectTrans.localRotation = Quaternion.Euler(0F, 0F, 0F);
+        rectTrans.anchorMin = Vector2.zero;
+        rectTrans.anchorMax = Vector2.one;
+        rectTrans.pivot = new Vector2(0.5F, 0.5F);
+        rectTrans.offsetMin = Vector2.zero;
+        rectTrans.offsetMax = Vector2.zero;
     }
 
-    [MenuItem("GameObject/UI/Tools/Canvas", true)]
-    static bool CheckCreateDefaultCanvas()
+    //[MenuItem("GameObject/UI/Tools/New UI", true)]
+    static bool CheckCreateNewUI()
     {
         if (Selection.gameObjects.Length != 1)
             return false;
 
-        var selectedName = Selection.activeGameObject.name;
-        if (selectedName == "UI Root")
+        var selectedObj = Selection.activeGameObject;
+        if (selectedObj != null && selectedObj.GetComponent<Canvas>() != null)
             return true;
 
         return false;
     }
+
 
     [MenuItem("GameObject/UI/Tools/ShortCutCreate/Label &#l")]
     static void Label()

@@ -334,10 +334,12 @@ public class UIMgr : MonoBehaviour
 
         var prefabInstance = GameObject.Instantiate (uiPrefab) as GameObject;
         prefabInstance.name = uiCfg.name;
-        prefabInstance.transform.SetParent (UICanvas.transform);
-        prefabInstance.transform.localPosition = Vector3.zero;
-        prefabInstance.transform.localScale = Vector3.one;
-        prefabInstance.transform.localRotation = Quaternion.Euler (0F, 0F, 0F);
+        var rectTrans = prefabInstance.transform as RectTransform;
+        rectTrans.SetParent (UICanvas.transform);
+        rectTrans.pivot = new Vector2(0.5F, 0.5F);
+        rectTrans.localPosition = Vector3.zero;
+        rectTrans.localScale = Vector3.one;
+        rectTrans.localRotation = Quaternion.Euler (0F, 0F, 0F);
 
         uiCfg.instance = prefabInstance;
 
