@@ -503,6 +503,14 @@ public class UIMgr : MonoBehaviour
         Close (uiCfg.name);
     }
 
+    public void CloseAll()
+    {
+        while(GetTopUI() != null)
+        {
+            Close();
+        }
+    }
+
     public void Close(string name)
     {
         if (!CheckUIStack ())
