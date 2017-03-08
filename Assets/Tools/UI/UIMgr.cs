@@ -216,11 +216,11 @@ public class UIMgr : MonoBehaviour
         if (!CheckUIInterface (uiGo))
         {
             RemoveUIFromCanvas (uiCfg.name);
-            Debug.LogError ("Missing component of IUIController.");
+            Debug.LogError ("Missing component of UIBase.");
             return;
         }
 
-        if (!CheckComponent<IUIController> (uiGo))
+        if (!CheckComponent<UIBase> (uiGo))
         {
             RemoveUIFromCanvas (uiCfg.name);
             Debug.LogError ("Missing component of Canvas.");
@@ -233,7 +233,7 @@ public class UIMgr : MonoBehaviour
 
         uiCfg.state = UICfg.UIState.Opening;
 
-        var openingUIController = uiGo.GetComponent<IUIController> ();
+        var openingUIController = uiGo.GetComponent<UIBase> ();
         openingUIController.OnOpen ();
 
         if (!string.IsNullOrEmpty (uiCfg.openAni))
@@ -284,7 +284,7 @@ public class UIMgr : MonoBehaviour
         if (go == null)
             return false;
 
-        return go.GetComponent<IUIController> () != null;
+        return go.GetComponent<UIBase> () != null;
     }
 
     static bool CheckComponent<T>(GameObject go)
@@ -431,11 +431,11 @@ public class UIMgr : MonoBehaviour
 
             if (!CheckUIInterface(uiCfg.instance))
             {
-                Debug.LogError("Missing component of IUIController.");
+                Debug.LogError("Missing component of UIBase.");
                 return;
             }
 
-            var uiController = uiCfg.instance.GetComponent<IUIController>();
+            var uiController = uiCfg.instance.GetComponent<UIBase>();
             uiController.OnBecomeSecondaryUI(openingUICfg.type, openingUICfg.name);
         }
     }
@@ -526,7 +526,7 @@ public class UIMgr : MonoBehaviour
             
             if (!CheckUIInterface (uiCfg.instance))
             {
-                Debug.LogError ("Missing component of IUIController.");
+                Debug.LogError ("Missing component of UIBase.");
                 continue;
             }
 
@@ -534,7 +534,7 @@ public class UIMgr : MonoBehaviour
 
             if (!string.IsNullOrEmpty (uiCfg.closeAni))
             {
-                var uiController = uiCfg.instance.GetComponent<IUIController> ();
+                var uiController = uiCfg.instance.GetComponent<UIBase> ();
                 uiController.OnBeforePlayCloseAnimation ();
 
                 bool playSuccess = PlayAnimation (uiCfg.instance, uiCfg.closeAni, (go) =>
@@ -560,7 +560,7 @@ public class UIMgr : MonoBehaviour
     		return;
     	}
 
-        var uiController = uiCfg.instance.GetComponent<IUIController> ();
+        var uiController = uiCfg.instance.GetComponent<UIBase> ();
         if (uiController == null)
             return;
         
@@ -591,11 +591,11 @@ public class UIMgr : MonoBehaviour
 
             if (!CheckUIInterface (newTopUICfg.instance))
             {
-                Debug.LogError ("Missing component of IUIController.");
+                Debug.LogError ("Missing component of UIBase.");
                 return;
             }
 
-            var newTopUIController = newTopUICfg.instance.GetComponent<IUIController> ();
+            var newTopUIController = newTopUICfg.instance.GetComponent<UIBase> ();
             newTopUIController.OnBecomeTopUI (newTopUICfg.type);
         }
 

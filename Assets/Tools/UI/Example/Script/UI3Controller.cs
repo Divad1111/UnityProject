@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UI3Controller : MonoBehaviour, IUIController
+public class UI3Controller : UIBase
 {
     Button _btnOpen;
     Button _btnClose;
@@ -29,32 +29,32 @@ public class UI3Controller : MonoBehaviour, IUIController
 
     }
 
-    public virtual void OnOpen ()
+    public override void OnOpen ()
     {
         Debug.Log ("Open UI3");
     }
 
-    public virtual void OnBecomeTopUI(UIType uiType)
+    public override void OnBecomeTopUI(UIType uiType)
     {
         Debug.Log ("OnBecomeTopUI UI3");
     }
 
-    public virtual void OnBecomeSecondaryUI (UIType topUIType, string topUIName)
+    public override void OnBecomeSecondaryUI (UIType topUIType, string topUIName)
     {
         Debug.Log ("OnBecomeSecondaryUI UI3");
     }
 
-    public virtual void OnAfterPlayOpenAnimation()
+    public override void OnAfterPlayOpenAnimation()
     {
         Debug.Log ("OnAfterPlayOpenAnimation UI3");
     }
 
-    public virtual void OnBeforePlayCloseAnimation ()
+    public override void OnBeforePlayCloseAnimation ()
     {
         Debug.Log ("OnBeforePlayCloseAnimation UI3");
     }
 
-    public virtual void OnClose ()
+    public override void OnClose ()
     {
         Debug.Log ("OnClose UI3");
     }
